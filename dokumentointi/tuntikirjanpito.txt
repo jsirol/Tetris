@@ -1,0 +1,3 @@
+Pvm                käytetty aika               työtehtävä
+
+4.9                1,5h                        Gitin opettelua ja dokumentaation aloittaminen
