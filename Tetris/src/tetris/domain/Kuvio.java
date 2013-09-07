@@ -30,6 +30,17 @@ public class Kuvio implements Kaantyva {
         return this.palat;
     }
 
+    //palauttaa kuviossa tietyllä rivillä esiintyvät palat listassa. parametrin isompi arvo tarkoittaa alempaa riviä.
+    public ArrayList<Pala> getRivinPalat(int moneskoRivi) {
+        ArrayList<Pala> rivinPalat = new ArrayList<Pala>();
+        for (Pala pala : this.palat) {
+            if (pala.getY() == moneskoRivi) {
+                rivinPalat.add(pala);
+            }
+        }
+        return rivinPalat;
+    }
+
     //lisää jokaisen kuvioon kuuluvan palan y-koordinaattiin yhden
     public void pudotaYhdella() {
         for (Pala pala : this.palat) {
@@ -57,7 +68,7 @@ public class Kuvio implements Kaantyva {
     }
 
     //palauttaa kuviossa esiintyvista paloista eniten oikealla olevan
-    public Pala getSuurimmanXKoordinaatinPala() {
+    public Pala getPalaJollaSuurinXKoordinaatti() {
         Pala suurin = null;
         for (Pala pala : this.palat) {
             if (suurin == null) {
@@ -70,7 +81,7 @@ public class Kuvio implements Kaantyva {
     }
 
     //palauttaa kuviossa esiintyvista paloista eniten vasemmalla olevan
-    public Pala getPienimmänXKoordinaatinPala() {
+    public Pala getPalaJollaPieninXKoordinaatti() {
         Pala pienin = null;
         for (Pala pala : this.palat) {
             if (pienin == null) {
@@ -83,7 +94,7 @@ public class Kuvio implements Kaantyva {
     }
 
     //palauttaa kuviossa esiintyvista paloista alimpana olevan
-    public Pala getSuurimmanYKoordinaatinPala() {
+    public Pala getPalaJollaSuurinYKoordinaatti() {
         Pala suurin = null;
         for (Pala pala : this.palat) {
             if (suurin == null) {
@@ -96,7 +107,7 @@ public class Kuvio implements Kaantyva {
     }
 
     //palauttaa kuviossa esiintyvista paloista ylimpänä olevan
-    public Pala getPienimmänYKoordinaatinPala() {
+    public Pala getPalaJollaPieninYKoordinaatti() {
         Pala pienin = null;
         for (Pala pala : this.palat) {
             if (pienin == null) {
@@ -106,6 +117,12 @@ public class Kuvio implements Kaantyva {
             }
         }
         return pienin;
+    }
+
+    //toteutuksen hoitavat aliluokat
+    @Override
+    public Pala getRotaatioPisteenaOlevaPala() {
+        return null;
     }
 
     @Override

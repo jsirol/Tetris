@@ -68,8 +68,13 @@ public class KuvioTest {
     }
 
     @Test
-    public void getPalatPalauttaaOikeatPalat() {
+    public void metodiGetPalatPalauttaaOikeatPalat() {
         assertEquals("[(-2,10), (0,0), (-3,-6), (1,-1)]", kuvio.getPalat().toString());
+    }
+    
+    @Test
+    public void metodiGetRivinPalatPalauttaaOikeatPalat() {
+        assertEquals("[(0,0)]", kuvio.getRivinPalat(0).toString());
     }
 
     @Test
@@ -83,22 +88,22 @@ public class KuvioTest {
     }
 
     @Test
-    public void getSuurimmanXKoordinaatinPalaToimii() {
-        assertEquals("(1,-1)", kuvio.getSuurimmanXKoordinaatinPala().toString());
+    public void metodiGetPalaJollaSuurinXKoordinaattiToimii() {
+        assertEquals("(1,-1)", kuvio.getPalaJollaSuurinXKoordinaatti().toString());
     }
 
     @Test
-    public void getSuurimmanYKoordinaatinPalaToimii() {
-        assertEquals("(-2,10)", kuvio.getSuurimmanYKoordinaatinPala().toString());
+    public void metodiGetPalaJollaSuurinYKoordinaattiToimii() {
+        assertEquals("(-2,10)", kuvio.getPalaJollaSuurinYKoordinaatti().toString());
     }
 
     @Test
-    public void getPienimmanXKoordinaatinPalaToimii() {
-        assertEquals("(-3,-6)", kuvio.getPienimmänXKoordinaatinPala().toString());
+    public void metodiGetPalaJollaPieninXKoordinaattiToimii() {
+        assertEquals("(-3,-6)", kuvio.getPalaJollaPieninXKoordinaatti().toString());
     }
 
     @Test
-    public void getPienimmanYKoordinaatinPalaToimii() {
-        assertEquals("(-3,-6)", kuvio.getPienimmänYKoordinaatinPala().toString());
+    public void metodiGetPalaJollaPieninYKoordinaattiToimii() {
+        assertEquals("(-3,-6)", kuvio.getPalaJollaPieninYKoordinaatti().toString());
     }
 }

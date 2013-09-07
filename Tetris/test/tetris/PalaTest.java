@@ -48,6 +48,11 @@ public class PalaTest {
     }
     
     @Test
+    public void konstruktoriAsettaaVarinOikein() {
+        assertEquals("KELTAINEN", ekaPala.getVarinNimi().toString());
+    }
+    
+    @Test
     public void palaPutoaaOikein() {
         ekaPala.pudotaYhdella();
         for(int i=0; i<5; i++) {
@@ -64,5 +69,6 @@ public class PalaTest {
         assertEquals("(0,-1)", ekaPala.toString());
         assertEquals("(6,12)", tokaPala.toString());
     }
+    
     
 }

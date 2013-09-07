@@ -36,6 +36,11 @@ public class Pala {
     public Color getVari() {
         return this.vari.getVari();
     }
+    
+    //palauttaa värin nimen, esim. KELTAINEN. Testausta varten.
+    public Vari getVarinNimi() {
+        return this.vari;
+    }
 
     
     public void setX(int x) {
