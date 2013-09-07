@@ -1,3 +1,18 @@
-Pvm                käytetty aika               työtehtävä
+4.9.2013
+-----------
+Gitin opettelua ja dokumentaation aloittaminen.
 
-4.9                1,5h                        Gitin opettelua ja dokumentaation aloittaminen
+*Käytetty aika 1,5h.
+
+
+8.9.2013
+-----------
+Ohjelmoinnin aloittaminen (perusluokat ja niihin liittyviä testejä) ja määrittelyvaiheen luokkakaavion piirtäminen. 
+
+*Käytetty aika 7h.
+
+
+
+
+                         
+                  
