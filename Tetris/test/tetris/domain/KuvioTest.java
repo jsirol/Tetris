@@ -1,10 +1,12 @@
-package tetris;
+package tetris.domain;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tetris.Vari;
 import static org.junit.Assert.*;
 import tetris.domain.Kuvio;
 import tetris.domain.Pala;
@@ -66,44 +68,48 @@ public class KuvioTest {
         kuvio.siirraOikealle();
         assertEquals("(-1,10), (1,0), (-2,-6), (2,-1)", kuvio.toString());
     }
-
-    @Test
-    public void metodiGetPalatPalauttaaOikeatPalat() {
-        assertEquals("[(-2,10), (0,0), (-3,-6), (1,-1)]", kuvio.getPalat().toString());
-    }
     
     @Test
-    public void metodiGetRivinPalatPalauttaaOikeatPalat() {
-        assertEquals("[(0,0)]", kuvio.getRivinPalat(0).toString());
+    public void metodiGetRivinPalatPalauttaaOikeatPalat() {     
+        ArrayList<Pala> rivinOikeatPalat = new ArrayList<Pala>();
+        rivinOikeatPalat.add(palautaKuvionPaikassaOlevaPala(1));
+        assertEquals(rivinOikeatPalat, kuvio.getRivinPalat(0));
     }
 
     @Test
-    public void poistaPalaPoistaaOikeanPalan() {
+    public void metodiPoistaPalaPoistaaOikeanPalan() {
         Pala poistettavaPala = new Pala(2, 4, Vari.ORANSSI);
         Pala lisattavaPala = new Pala(9, 9, Vari.ORANSSI);
         kuvio.lisaaPala(poistettavaPala);
         kuvio.lisaaPala(lisattavaPala);
-        kuvio.poistaPala(poistettavaPala);
-        assertEquals("(-2,10), (0,0), (-3,-6), (1,-1), (9,9)", kuvio.toString());
+        kuvio.poistaPala(poistettavaPala);       
+        assertEquals(lisattavaPala, palautaKuvionPaikassaOlevaPala(4));
     }
 
     @Test
     public void metodiGetPalaJollaSuurinXKoordinaattiToimii() {
-        assertEquals("(1,-1)", kuvio.getPalaJollaSuurinXKoordinaatti().toString());
+        assertEquals(palautaKuvionPaikassaOlevaPala(3), kuvio.getPalaJollaSuurinXKoordinaatti());
     }
 
     @Test
     public void metodiGetPalaJollaSuurinYKoordinaattiToimii() {
-        assertEquals("(-2,10)", kuvio.getPalaJollaSuurinYKoordinaatti().toString());
+        assertEquals(palautaKuvionPaikassaOlevaPala(0), kuvio.getPalaJollaSuurinYKoordinaatti());
     }
 
     @Test
     public void metodiGetPalaJollaPieninXKoordinaattiToimii() {
-        assertEquals("(-3,-6)", kuvio.getPalaJollaPieninXKoordinaatti().toString());
+        assertEquals(palautaKuvionPaikassaOlevaPala(2), kuvio.getPalaJollaPieninXKoordinaatti());
     }
 
     @Test
     public void metodiGetPalaJollaPieninYKoordinaattiToimii() {
-        assertEquals("(-3,-6)", kuvio.getPalaJollaPieninYKoordinaatti().toString());
+        assertEquals(palautaKuvionPaikassaOlevaPala(2), kuvio.getPalaJollaPieninYKoordinaatti());
     }
+    
+    
+    private Pala palautaKuvionPaikassaOlevaPala(int paikkanro) {
+        return this.kuvio.getPalat().get(paikkanro);
+    }
+    
+    
 }

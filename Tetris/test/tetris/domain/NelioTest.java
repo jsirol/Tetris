@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris;
+package tetris.domain;
 
 import org.junit.After;
 import org.junit.AfterClass;

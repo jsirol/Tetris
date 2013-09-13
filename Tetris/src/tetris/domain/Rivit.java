@@ -22,4 +22,12 @@ public class Rivit extends Kuvio {
             super.poistaPala(pala);
         }
     }
+
+    //palauttaa true jos rivi rivinNro on täysi, muuten false.
+    public boolean riviTaysi(int rivinNro, int rivinLeveys) {
+        if (this.getRivinPalat(rivinNro).size() == rivinLeveys) {
+            return true;
+        }
+        return false;
+    }
 }

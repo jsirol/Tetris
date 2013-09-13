@@ -1,4 +1,4 @@
-package tetris;
+package tetris.domain;
 
 
 import org.junit.After;
@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.Vari;
 import tetris.Vari;
 import tetris.domain.Pala;
 
@@ -44,7 +45,7 @@ public class PalaTest {
 
     @Test
     public void konstruktoriAsettaaSijainninOikein() {
-        assertEquals("(10,10)", ekaPala.toString());       
+        assertEquals("(10,10)", getPalanSijainti(ekaPala));       
     }
     
     @Test
@@ -58,16 +59,20 @@ public class PalaTest {
         for(int i=0; i<5; i++) {
             tokaPala.pudotaYhdella();
         }
-        assertEquals("(10,11)", ekaPala.toString());
-        assertEquals("(8,8)", tokaPala.toString());
+        assertEquals("(10,11)", getPalanSijainti(ekaPala));
+        assertEquals("(8,8)", getPalanSijainti(tokaPala));
     }
     
     @Test
     public void setSijaintiAsettaaArvonOikein() {
         ekaPala.setSijainti(0, -1);
         tokaPala.setSijainti(6, 12);
-        assertEquals("(0,-1)", ekaPala.toString());
-        assertEquals("(6,12)", tokaPala.toString());
+        assertEquals("(0,-1)", getPalanSijainti(ekaPala));
+        assertEquals("(6,12)", getPalanSijainti(tokaPala));
+    }
+    
+    private String getPalanSijainti(Pala pala) {
+        return "("+pala.getX() + "," + pala.getY() + ")";
     }
     
     

@@ -1,10 +1,11 @@
-package tetris;
+package tetris.domain;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tetris.Vari;
 import static org.junit.Assert.*;
 import tetris.domain.Pala;
 import tetris.domain.Rivit;

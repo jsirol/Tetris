@@ -1,4 +1,5 @@
-package tetris;
+package tetris.domain;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -6,6 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.Vari;
 import tetris.domain.Palkki;
 
 /**
@@ -29,8 +31,7 @@ public class PalkkiTest {
 
     @Before
     public void setUp() {
-        palkki = new Palkki(5, -2);
-
+        palkki = new Palkki(5, -2);  
     }
 
     @After
@@ -44,7 +45,8 @@ public class PalkkiTest {
 
     @Test
     public void getRotaatioPisteenaOlevaPalaPalauttaaOikeanPalan() {
-        assertEquals("(5,-2)", palkki.getRotaatioPisteenaOlevaPala().toString());
+        Pala rotaatioPiste = palkki.getPalat().get(2);
+        assertEquals(rotaatioPiste, palkki.getRotaatioPisteenaOlevaPala());
     }
 
     @Test
@@ -61,4 +63,6 @@ public class PalkkiTest {
         palkki.kaanna();
         assertEquals(true, palkki.onVaakaAsennossa());
     }
+    
+    
 }

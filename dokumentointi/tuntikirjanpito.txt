@@ -11,6 +11,12 @@ Ohjelmoinnin aloittaminen (perusluokat ja niihin liittyviä testejä) ja määrittel
 
 *Käytetty aika 7h.
 
+13.9.2013
+-----------
+Ohjelmointia: graafisen käyttöliittymän tekoa. Muutamia testejä muuteltu. 
+
+*Käytetty aika 6h.
+
 
 
 
