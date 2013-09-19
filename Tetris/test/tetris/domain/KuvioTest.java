@@ -58,15 +58,11 @@ public class KuvioTest {
     }
 
     @Test
-    public void kuvioSiirtyyOikeinVasemmalle() {
-        kuvio.siirraVasemmalle();
+    public void kuvioSiirtyyOikeinSivuttain() {
+        kuvio.siirraKuviotaSivuttain(1);
+        kuvio.siirraKuviotaSivuttain(-1);
+        kuvio.siirraKuviotaSivuttain(-1);
         assertEquals("(-3,10), (-1,0), (-4,-6), (0,-1)", kuvio.toString());
-    }
-
-    @Test
-    public void kuvioSiirtyyOikeinOikealle() {
-        kuvio.siirraOikealle();
-        assertEquals("(-1,10), (1,0), (-2,-6), (2,-1)", kuvio.toString());
     }
     
     @Test

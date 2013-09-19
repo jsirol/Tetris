@@ -29,7 +29,7 @@ public class RivitTest {
     public static void tearDownClass() {
     }
 
-    //lisätään 2 täyttä rivi joissa palojen y-koordinaatit ovat 4,5,6
+    //lisätään 2 täyttä riviä joissa palojen y-koordinaatit ovat 4,5,6
     @Before
     public void setUp() {
         rivit = new Rivit(20, 30);
@@ -48,5 +48,11 @@ public class RivitTest {
     public void metodiTuhoaRiviToimiiOikein() {
         rivit.tuhoaRivi(5);
         assertEquals("[]", rivit.getRivinPalat(5).toString());        
+    }
+    
+    @Test
+    public void metodiRiviTaysiToimiiOikein() {
+        assertEquals(true, this.rivit.riviTaysi(4, 20));
+        assertEquals(false, this.rivit.riviTaysi(10, 20));
     }
 }

@@ -43,7 +43,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     private void piirraRivit(Graphics g) {
-        for (Pala pala : this.tetris.getRivit()) {
+        for (Pala pala : this.tetris.getRivit().getPalat()) {
             g.setColor(pala.getVari());
             g.fill3DRect(pala.getX() * palanPituus, pala.getY() * palanPituus, palanPituus, palanPituus, true);
         }

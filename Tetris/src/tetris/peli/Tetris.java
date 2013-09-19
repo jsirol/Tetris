@@ -39,19 +39,19 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     //arpoo ja palauttaa uuden kuvion
-    private Kuvio arvoKuvio() {
+    public Kuvio arvoKuvio() {
         int arpa = new Random().nextInt(4);
         if (arpa == 0) {
-            return new Nelio(this.leveys / 2, 0);
+            return new Nelio(this.leveys / 2, -3);
         } else {
-            return new Palkki(this.leveys / 2, 0);
+            return new Palkki(this.leveys / 2, -3);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.peliKaynnissa) {
-            if (!this.PutoavaKuvioKiinniLattiassa(kuvio) && !this.putoavaKuvioKiinniJossainRivissa(kuvio)) {
+            if (!this.putoavaKuvioAlimmallaRivilla(kuvio) && !this.putoavaKuvioKiinniJossainRivissa(kuvio)) {
                 kuvio.pudotaYhdella();
             } else {
                 for (Pala pala : this.kuvio.getPalat()) {
@@ -60,8 +60,7 @@ public class Tetris extends Timer implements ActionListener {
                 this.kuvio = this.arvoKuvio();
             }
             this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain();
-
-            if (this.PutoavaKuvioKiinniYlimmassaRivissa(kuvio)) {
+            if (this.putoavaKuvioKiinniYlimmassaRivissa(kuvio)) {
                 this.peliKaynnissa = false;
                 this.stop();
             }
@@ -85,7 +84,7 @@ public class Tetris extends Timer implements ActionListener {
             for (Pala pala : this.rivit.getRivinPalat(j)) {
                 Kuvio pudotettavaPala = new Kuvio();
                 pudotettavaPala.lisaaPala(pala);
-                while (!this.PutoavaKuvioKiinniLattiassa(pudotettavaPala) && !this.putoavaKuvioKiinniJossainRivissa(pudotettavaPala)) {
+                while (!this.putoavaKuvioAlimmallaRivilla(pudotettavaPala) && !this.putoavaKuvioKiinniJossainRivissa(pudotettavaPala)) {
                     pala.pudotaYhdella();
                 }
             }
@@ -93,7 +92,7 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     //palauttaa true, jos kuvio on kiinni "lattiassa" ja muuten false.
-    public boolean PutoavaKuvioAlimmallaRivilla(Kuvio putoavaKuvio) {
+    public boolean putoavaKuvioAlimmallaRivilla(Kuvio putoavaKuvio) {
         if (putoavaKuvio.getPalaJollaSuurinYKoordinaatti().getY() == this.korkeus - 1) {
             return true;
         }
@@ -101,7 +100,7 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     //palauttaa true jos putoava kuvio on kiinni "katossa" eikä voi enää pudota alaspäin.
-    public boolean PutoavaKuvioKiinniYlimmassaRivissa(Kuvio putoavaKuvio) {
+    public boolean putoavaKuvioKiinniYlimmassaRivissa(Kuvio putoavaKuvio) {
         if (putoavaKuvio.getPalaJollaPieninYKoordinaatti().getY() <= 0 && this.putoavaKuvioKiinniJossainRivissa(putoavaKuvio)) {
             return true;
         }
@@ -130,36 +129,85 @@ public class Tetris extends Timer implements ActionListener {
         return false;
     }
 
-    //palauttaa true jos putoava kuvio on kiinni "lattiassa", muuten palauttaa false.
-    public boolean PutoavaKuvioKiinniLattiassa(Kuvio putoavaKuvio) {
-        if (this.PutoavaKuvioAlimmallaRivilla(putoavaKuvio)) {
-            return true;
+
+
+    //tarkistaa voiko palaa siirtää oikealle tai vasemmalle osumatta jossakin rivissä jo olevaan palaan.
+    public boolean kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int negatiivinenOnVasenSuuntaMuutenOikea) {
+        for (Pala pala : this.kuvio.getPalat()) {
+            for (Pala rivinPala : this.rivit.getPalat()) {
+                if (pala.vieressaOnPala(negatiivinenOnVasenSuuntaMuutenOikea, rivinPala)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void liikutaKuviotaVasemmalle() {
+        if (this.kuvio.getPalaJollaPieninXKoordinaatti().getX() != 0 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(-1)) {
+            this.getKuvio().siirraKuviotaSivuttain(-1);
+        }
+    }
+
+    public void pudotaKuviotaAlasYhdellaJosVoi() {
+        if (!this.putoavaKuvioAlimmallaRivilla(this.getKuvio()) && !this.putoavaKuvioKiinniJossainRivissa(this.getKuvio())) {
+            this.getKuvio().pudotaYhdella();
+        }
+    }
+
+    public void liikutaKuviotaOikealle() {
+        if (this.kuvio.getPalaJollaSuurinXKoordinaatti().getX() != this.leveys - 1 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(1)) {
+            this.getKuvio().siirraKuviotaSivuttain(1);
+        }
+    }
+
+    public void kaannaKuviota() {
+        if (this.putoavaaKuviotaVoiKaantaa(this.kuvio)) {
+            this.getKuvio().kaanna();
+        }
+    }
+
+    public void pudotaPutoavaKuvioNiinAlasKuinVoi() {
+        while (true) {
+            if (!this.putoavaKuvioAlimmallaRivilla(this.getKuvio()) && !this.putoavaKuvioKiinniJossainRivissa(this.getKuvio())) {
+                this.getKuvio().pudotaYhdella();
+            } else {
+                break;
+            }
+        }
+    }
+    
+    
+
+    //päivittyy
+    public boolean putoavaaKuviotaVoiKaantaa(Kuvio kuvio) {     
+        if(kuvio.getClass()==Palkki.class) {
+            return this.palkkiaVoiKaantaa((Palkki) kuvio);
         }
         return false;
     }
-
-    //päivittyy
-    public boolean PutoavaaKuviotaVoiKaantaa() {
-        //to do
-        return true;
-    }
-
     
-    //päivittyy
-    public boolean KuviotaVoiSiirtaaVasemmalle() {
-        if (this.kuvio.getPalaJollaPieninXKoordinaatti().getX() == 0) {
+    //tarkistaa voiko palkkia kääntää. Palkkia v
+    public boolean palkkiaVoiKaantaa(Palkki palkki) {
+        int x=palkki.getRotaatioPisteenaOlevaPala().getX();
+        int y=palkki.getRotaatioPisteenaOlevaPala().getY();    
+        if(x-2<0 || x+2>this.leveys-1) {
             return false;
         }
-        return true;
-    }
-
-    //päivittyy
-    public boolean KuviotaVoiSiirtaaOikealle() {
-        if (this.kuvio.getPalaJollaSuurinXKoordinaatti().getX() == this.leveys - 1) {
-            return false;
+        for(int i=1;i<3;i++) {        
+            for(int j=1;j<3;j++) {
+                if(this.rivit.onkoRivissaTietyssaKoordinaatissaJoPala(y-i, x-j, y-i) || this.rivit.onkoRivissaTietyssaKoordinaatissaJoPala(y+i, x+j, y+i)) {
+                    return false;
+                }
+            }
         }
-        return true;
+        return true;      
     }
+    
+    
+    
+    
+    
 
     public boolean peliKaynnissa() {
         return this.peliKaynnissa;
@@ -167,6 +215,10 @@ public class Tetris extends Timer implements ActionListener {
 
     public Kuvio getKuvio() {
         return this.kuvio;
+    }
+
+    public void setKuvio(Kuvio kuvio) {
+        this.kuvio = kuvio;
     }
 
     public int getKorkeus() {
@@ -181,8 +233,8 @@ public class Tetris extends Timer implements ActionListener {
         this.paivitettava = paivitettava;
     }
 
-    public ArrayList<Pala> getRivit() {
-        return this.rivit.getPalat();
+    public Rivit getRivit() {
+        return this.rivit;
     }
 
     public void setPelikaynnissa(boolean totuusarvo) {

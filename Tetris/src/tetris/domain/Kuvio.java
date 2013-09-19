@@ -47,18 +47,15 @@ public class Kuvio implements Kaantyva {
             pala.setY(pala.getY() + 1);
         }
     }
-
-    //vähentää jokaisen kuvioon kuuluvan palan x-koordinaattia yhdellä
-    public void siirraVasemmalle() {
-        for (Pala pala : this.palat) {
-            pala.setX(pala.getX() - 1);
-        }
-    }
-
-    //lisää jokaisen kuvioon kuuluvan palan x-koordinaattia yhdellä
-    public void siirraOikealle() {
-        for (Pala pala : this.palat) {
-            pala.setX(pala.getX() + 1);
+    
+    //siirtaa kuviota sivulle, negatiivinen luku tarkoittaa vasempaa ja positiivinen oikeaa. 0 ei siirrä kuviota.
+    public void siirraKuviotaSivuttain(int suuntaJaMaara) {
+        for (Pala pala :this.palat) {
+            if(suuntaJaMaara<0) {
+                pala.setX((pala.getX()-1));
+            } else if(suuntaJaMaara>0) {
+                pala.setX(pala.getX()+1);
+            }
         }
     }
 

@@ -19,6 +19,7 @@ public class PalaTest {
     
     Pala ekaPala;
     Pala tokaPala;
+    Pala kolmasPala;
 
     
     public PalaTest() {
@@ -36,6 +37,7 @@ public class PalaTest {
     public void setUp() {
         ekaPala = new Pala(10,10,Vari.KELTAINEN);
         tokaPala = new Pala(8,3, Vari.VIHREA);
+        kolmasPala = new Pala(11,10, Vari.SININEN);
     }
     
     
@@ -70,6 +72,13 @@ public class PalaTest {
         assertEquals("(0,-1)", getPalanSijainti(ekaPala));
         assertEquals("(6,12)", getPalanSijainti(tokaPala));
     }
+    
+    @Test
+    public void metodiVieressaOnPalaToimiiOikein() {
+        assertEquals(true, ekaPala.vieressaOnPala(1, kolmasPala));
+        assertEquals(false, ekaPala.vieressaOnPala(-1, kolmasPala));
+    }
+    
     
     private String getPalanSijainti(Pala pala) {
         return "("+pala.getX() + "," + pala.getY() + ")";

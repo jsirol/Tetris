@@ -17,6 +17,12 @@ Ohjelmointia: graafisen käyttöliittymän tekoa. Muutamia testejä muuteltu.
 
 *Käytetty aika 6h.
 
+19.9.2013
+-----------
+Ohjelman tähänastisen toteutuksen parantelua. Luokkakaavio päivitetty. Kirjoitettu lisää testejä.
+
+*Käytetty aika 6h
+
 
 
 

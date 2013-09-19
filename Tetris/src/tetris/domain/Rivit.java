@@ -30,4 +30,14 @@ public class Rivit extends Kuvio {
         }
         return false;
     }
+    
+    public boolean onkoRivissaTietyssaKoordinaatissaJoPala(int rivi, int x, int y) {
+        for(Pala pala : this.getPalat()) {
+            if(pala.getX()==x && pala.getY()==y) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
