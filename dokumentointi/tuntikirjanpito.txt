@@ -23,6 +23,12 @@ Ohjelman tähänastisen toteutuksen parantelua. Luokkakaavio päivitetty. Kirjoitet
 
 *Käytetty aika 6h
 
+20.9.2013
+-----------
+Lisätty s- ja z-kirjaimia muistuttavat kuviot.
+
+*käytetty aika 3h
+
 
 
 

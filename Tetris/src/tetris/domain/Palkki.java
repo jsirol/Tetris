@@ -32,9 +32,8 @@ public class Palkki extends Kuvio {
         }
         
         //palauttaa true jos palkki on "vaaka-asennossa", muuten false
-        public boolean onVaakaAsennossa() {
-            int rotaatioPisteenYKoordinaatti= this.getRotaatioPisteenaOlevaPala().getY();
-            if(this.getPalat().get(0).getY()==rotaatioPisteenYKoordinaatti) {
+        public boolean onVaakaAsennossa() {           
+            if(super.onkoKuviossaTietyssaKoordinaatissaJoPala(this.getRotaatioPisteenaOlevaPala().getX()-2, this.getRotaatioPisteenaOlevaPala().getY())) {
                 return true;
             }
             return false;

@@ -47,14 +47,14 @@ public class Kuvio implements Kaantyva {
             pala.setY(pala.getY() + 1);
         }
     }
-    
+
     //siirtaa kuviota sivulle, negatiivinen luku tarkoittaa vasempaa ja positiivinen oikeaa. 0 ei siirrä kuviota.
     public void siirraKuviotaSivuttain(int suuntaJaMaara) {
-        for (Pala pala :this.palat) {
-            if(suuntaJaMaara<0) {
-                pala.setX((pala.getX()-1));
-            } else if(suuntaJaMaara>0) {
-                pala.setX(pala.getX()+1);
+        for (Pala pala : this.palat) {
+            if (suuntaJaMaara < 0) {
+                pala.setX((pala.getX() - 1));
+            } else if (suuntaJaMaara > 0) {
+                pala.setX(pala.getX() + 1);
             }
         }
     }
@@ -114,6 +114,15 @@ public class Kuvio implements Kaantyva {
             }
         }
         return pienin;
+    }
+
+    public boolean onkoKuviossaTietyssaKoordinaatissaJoPala(int x, int y) {
+        for (Pala pala : this.getPalat()) {
+            if (pala.getX() == x && pala.getY() == y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //toteutuksen hoitavat aliluokat

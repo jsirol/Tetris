@@ -12,6 +12,7 @@ public enum Vari {
     KELTAINEN(Color.YELLOW),
     ORANSSI(Color.ORANGE),
     VIHREA(Color.GREEN),
+    MUSTA(Color.BLACK),
     SININEN(Color.BLUE);
     
     
