@@ -29,6 +29,13 @@ Lisätty s- ja z-kirjaimia muistuttavat kuviot.
 
 *käytetty aika 3h
 
+21.9.2013
+-----------
+Siistitty hieman koodia ja kokeiltu erilaisia toteutuksia pelilogiikalle. Toteutuksessa esiintyneet ongelmat ja ajan riittämättömyys niiden perusteelliseen korjaamiseen pakottaneet muokkaamaan peliä hieman yksinkertaisemmaksi. 
+Muokattu aiheen kuvaus vastaamaan yllä mainittua toteutusideaa.
+
+*käytetty aika 7h 
+
 
 
 
