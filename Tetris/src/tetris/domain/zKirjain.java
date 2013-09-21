@@ -10,11 +10,11 @@ import tetris.Vari;
 public class zKirjain extends Kuvio {
         public zKirjain(int x, int y) {
         super();
-        Vari musta = Vari.MUSTA;
-        super.lisaaPala(new Pala(x-1,y-1, musta));
-        super.lisaaPala(new Pala(x,y-1, musta));   
-        super.lisaaPala(new Pala(x,y, musta)); //rotaatiopiste paikassa 2
-        super.lisaaPala(new Pala(x+1,y, musta));
+        Vari oranssi = Vari.ORANSSI;
+        super.lisaaPala(new Pala(x-1,y-1, oranssi));
+        super.lisaaPala(new Pala(x,y-1, oranssi));   
+        super.lisaaPala(new Pala(x,y, oranssi)); //rotaatiopiste paikassa 2
+        super.lisaaPala(new Pala(x+1,y, oranssi));
     }
     
     public boolean onVaakaAsennossa() {

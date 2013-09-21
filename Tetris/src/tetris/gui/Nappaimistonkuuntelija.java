@@ -25,13 +25,13 @@ public class Nappaimistonkuuntelija implements KeyListener {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     this.tetris.kaannaKuviota();
                 } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    this.tetris.pudotaPutoavaKuvioNiinAlasKuinVoi();
+                    this.tetris.pudotaKuvioNiinAlasKuinVoi(tetris.getKuvio());
                 } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     this.tetris.liikutaKuviotaVasemmalle();
                 } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     this.tetris.liikutaKuviotaOikealle();
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    this.tetris.pudotaKuviotaAlasYhdellaJosVoi();
+                    this.tetris.pudotaKuviotaAlasYhdellaJosVoi(tetris.getKuvio());
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {

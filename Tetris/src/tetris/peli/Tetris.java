@@ -29,7 +29,7 @@ public class Tetris extends Timer implements ActionListener {
     private PalojenKaanto kaanto;
 
     public Tetris(int leveys, int korkeus) {
-        super(200, null);
+        super(80, null);
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
@@ -59,16 +59,17 @@ public class Tetris extends Timer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.peliKaynnissa) {
-            if (!this.putoavaKuvioAlimmallaRivilla(kuvio) && !this.putoavaKuvioKiinniJossainRivissa(kuvio)) {
+            if (!this.putoavaKuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
                 kuvio.pudotaYhdella();
             } else {
                 for (Pala pala : this.kuvio.getPalat()) {
                     this.rivit.lisaaPala(new Pala(pala.getX(), pala.getY(), pala.getVarinNimi()));
                 }
+                this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain();
                 this.kuvio = this.arvoKuvio();
             }
-            this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain();
-            if (this.putoavaKuvioKiinniYlimmassaRivissa(kuvio)) {
+
+            if (this.kuvioKiinniYlimmassaRivissa(kuvio)) {
                 this.peliKaynnissa = false;
                 this.stop();
             }
@@ -76,23 +77,23 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-    //tuhoaa täydet rivit ja kutsuu metodia pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy
+    //tuhoaa täydet rivit ja kutsuu metodia pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy.
     public void tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain() {
         for (int i = 0; i < this.korkeus; i++) {
             if (this.rivit.riviTaysi(i, leveys)) {
-                this.rivit.tuhoaRivi(i);
+                this.rivit.tuhoaRivi(i);               
                 this.pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(i);
             }
         }
     }
 
-    //pudottaa annetun rivin yläpuolisia paloja alaspäin niin kauan kunnes ne ovat kiinni jossain (vajaassa) rivissä tai lattiassa.
-    public void pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(int riviJonkaYlapuoleltaPudotetaan) {
+    //pudottaa annetun rivin yläpuolisia paloja alaspäin niin kauan kunnes ne ovat kiinni jossain (vajaassa) rivissä tai lattiassa. 
+    public void pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(int riviJonkaYlapuoleltaPudotetaan) {    
         for (int j = riviJonkaYlapuoleltaPudotetaan + 1; j > 0; j--) {
             for (Pala pala : this.rivit.getRivinPalat(j)) {
                 Kuvio pudotettavaPala = new Kuvio();
                 pudotettavaPala.lisaaPala(pala);
-                while (!this.putoavaKuvioAlimmallaRivilla(pudotettavaPala) && !this.putoavaKuvioKiinniJossainRivissa(pudotettavaPala)) {
+                while (!this.putoavaKuvioAlimmallaRivilla(pudotettavaPala) && !this.kuvioKiinniJossainRivissa(pudotettavaPala)) {
                     pala.pudotaYhdella();
                 }
             }
@@ -108,17 +109,17 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     //palauttaa true jos putoava kuvio on kiinni "katossa" eikä voi enää pudota alaspäin.
-    public boolean putoavaKuvioKiinniYlimmassaRivissa(Kuvio putoavaKuvio) {
-        if (putoavaKuvio.getPalaJollaPieninYKoordinaatti().getY() <= 0 && this.putoavaKuvioKiinniJossainRivissa(putoavaKuvio)) {
+    public boolean kuvioKiinniYlimmassaRivissa(Kuvio kuvio) {
+        if (kuvio.getPalaJollaPieninYKoordinaatti().getY() <= 0 && this.kuvioKiinniJossainRivissa(kuvio)) {
             return true;
         }
         return false;
     }
 
     //kuin metodi putoavaKuvioKiinniTietyssaRivissa, mutta käy läpi tetriksen jokaisen rivin.
-    public boolean putoavaKuvioKiinniJossainRivissa(Kuvio putoavaKuvio) {
+    public boolean kuvioKiinniJossainRivissa(Kuvio kuvio) {
         for (int i = 0; i < this.korkeus; i++) {
-            if (this.putoavaKuvioKiinniTietyssaRivissa(i, putoavaKuvio)) {
+            if (this.kuvioKiinniTietyssaRivissa(i, kuvio)) {
                 return true;
             }
         }
@@ -126,7 +127,7 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     //palauttaa true jos putoavan kuvion jokin pala seuraavalla pudotaYhdella metodin kutsulla olisi tämän metodin parametrina annettavan rivin jonkin palan kanssa samassa sijainnissa.
-    public boolean putoavaKuvioKiinniTietyssaRivissa(int riviNro, Kuvio putoavaKuvio) {
+    public boolean kuvioKiinniTietyssaRivissa(int riviNro, Kuvio putoavaKuvio) {
         for (Pala pala : this.rivit.getRivinPalat(riviNro)) {
             for (Pala kuvionPala : putoavaKuvio.getPalat()) {
                 if (pala.getY() == kuvionPala.getY() + 1 && pala.getX() == kuvionPala.getX()) {
@@ -155,8 +156,8 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-    public void pudotaKuviotaAlasYhdellaJosVoi() {
-        if (!this.putoavaKuvioAlimmallaRivilla(this.getKuvio()) && !this.putoavaKuvioKiinniJossainRivissa(this.getKuvio())) {
+    public void pudotaKuviotaAlasYhdellaJosVoi(Kuvio kuvio) {
+        if (!this.putoavaKuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
             this.getKuvio().pudotaYhdella();
         }
     }
@@ -173,10 +174,10 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-    public void pudotaPutoavaKuvioNiinAlasKuinVoi() {
+    public void pudotaKuvioNiinAlasKuinVoi(Kuvio kuvio) {
         while (true) {
-            if (!this.putoavaKuvioAlimmallaRivilla(this.getKuvio()) && !this.putoavaKuvioKiinniJossainRivissa(this.getKuvio())) {
-                this.getKuvio().pudotaYhdella();
+            if (!this.putoavaKuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
+                this.pudotaKuviotaAlasYhdellaJosVoi(kuvio);
             } else {
                 break;
             }

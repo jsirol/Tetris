@@ -67,16 +67,16 @@ public class TetrisTest {
     @Test
     public void metodiPutoavaKuvioKiinniYlimmassaRivissaToimiiOikein() {
         tetris.setKuvio(new Palkki(5,-3));
-        assertEquals(false, tetris.putoavaKuvioKiinniYlimmassaRivissa(tetris.getKuvio()));
+        assertEquals(false, tetris.kuvioKiinniYlimmassaRivissa(tetris.getKuvio()));
         this.taytaYlinRivi();
-        assertEquals(true, tetris.putoavaKuvioKiinniYlimmassaRivissa(tetris.getKuvio()));
+        assertEquals(true, tetris.kuvioKiinniYlimmassaRivissa(tetris.getKuvio()));
     }
     
     @Test
     public void metodiPutoavaKuvioKiinniTietyssaRivissaToimiiOikein() {
-        assertEquals(false, tetris.putoavaKuvioKiinniTietyssaRivissa(29, tetris.getKuvio()));
+        assertEquals(false, tetris.kuvioKiinniTietyssaRivissa(29, tetris.getKuvio()));
         tetris.setKuvio(new Palkki(5,26));
-        assertEquals(true, tetris.putoavaKuvioKiinniTietyssaRivissa(29, tetris.getKuvio()));
+        assertEquals(true, tetris.kuvioKiinniTietyssaRivissa(29, tetris.getKuvio()));
     }
     
     @Test
@@ -91,18 +91,8 @@ public class TetrisTest {
     @Test
     public void metodiPudotaPutoavaKuvioNiinAlasKuinVoiToimiiOikein() {
         tetris.setKuvio(new Palkki(5,5));
-        tetris.pudotaPutoavaKuvioNiinAlasKuinVoi();
+        tetris.pudotaKuvioNiinAlasKuinVoi(tetris.getKuvio());
         assertEquals("[(5,23), (5,24), (5,25), (5,26), (5,27)]", tetris.getKuvio().getPalat().toString());
-    }
-    
-    @Test
-    public void metodiPalkkiaVoiKaantaaToimiiOikein() {
-        tetris.setKuvio(new Palkki(2,5));
-        assertEquals(true,tetris.palkkiaVoiKaantaa((Palkki) tetris.getKuvio()));
-        tetris.getRivit().lisaaPala(new Pala(1,3,Vari.ORANSSI));
-        tetris.getRivit().lisaaPala(new Pala(4,6,Vari.ORANSSI));
-        assertEquals(false, tetris.palkkiaVoiKaantaa((Palkki) tetris.getKuvio()));
-        assertEquals(false, tetris.palkkiaVoiKaantaa((Palkki) tetris.getKuvio()));       
     }
     
     
