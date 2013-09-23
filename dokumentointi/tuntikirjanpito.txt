@@ -36,6 +36,12 @@ Muokattu aiheen kuvaus vastaamaan yllä mainittua toteutusideaa.
 
 *käytetty aika 7h 
 
+22.9.2013
+----------
+Tehty loputkin kuvion alaluokista ja toteutettu niille kääntölogiikka. Huomattu oma (tyhmä) ajatusvirhe  ja saatu peliloogikka sittenkin toimimaan kuten alkuperäisissä ajatuksissa. (ks. 21.9. merkintä tuntikirjanpidossa). Korjattu koodi tältä osin, sekä päivitetty aiheen kuvaus ja luokkakaaviot jälleen ajantasaisiksi.
+
+*käytetty aika 7h
+
 
 
 
