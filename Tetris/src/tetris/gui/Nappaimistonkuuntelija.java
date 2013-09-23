@@ -2,7 +2,7 @@ package tetris.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tetris.peli.Peli;
+import tetris.Peli.Tetris;
 
 /**
  *
@@ -10,10 +10,10 @@ import tetris.peli.Peli;
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
-    private Peli tetris;
+    private Tetris tetris;
     private boolean keskeytetty;
 
-    public Nappaimistonkuuntelija(Peli tetris) {
+    public Nappaimistonkuuntelija(Tetris tetris) {
         this.tetris = tetris;
         this.keskeytetty = false;
     }

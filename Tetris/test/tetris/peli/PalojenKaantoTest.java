@@ -4,6 +4,8 @@
  */
 package tetris.peli;
 
+import tetris.Peli.Tetris;
+import tetris.Peli.PalojenKaantoLogiikka;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,8 +24,8 @@ public class PalojenKaantoTest {
     
     
     //muokkaa riippumattomaksi luokasta tetris
-    Peli tetris;
-    PalojenKaanto kaanto;
+    Tetris tetris;
+    PalojenKaantoLogiikka kaanto;
     
     public PalojenKaantoTest() {
     }
@@ -38,8 +40,8 @@ public class PalojenKaantoTest {
     
     @Before
     public void setUp() {
-        tetris=new Peli(15,20);
-        kaanto=new PalojenKaanto(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
+        tetris=new Tetris(15,20);
+        kaanto=new PalojenKaantoLogiikka(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
     }
     
     @After

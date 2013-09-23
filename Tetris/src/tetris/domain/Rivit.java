@@ -1,7 +1,5 @@
 package tetris.domain;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Johannes
@@ -13,27 +11,17 @@ public class Rivit extends Kuvio {
     private int leveys;
     private int korkeus;
     
-    //testi
-    private ArrayList<Kuvio> kuviot;
 
     public Rivit(int leveys, int korkeus) {
         super();
         this.leveys = leveys;
         this.korkeus = korkeus;
-        this.kuviot=new ArrayList<Kuvio>();
     }
 
     public void tuhoaRivi(int y) {
         for (Pala pala : super.getRivinPalat(y)) {
             super.poistaPala(pala);
         }
-        //testiosa alkoi
-        for(Kuvio kuvio : this.kuviot) {
-            for(Pala pala : kuvio.getRivinPalat(y)) {
-                kuvio.poistaPala(pala);
-            }
-        }
-        //testiosa loppui
     }
 
     //palauttaa true jos rivi rivinNro on täysi, muuten false.
@@ -42,24 +30,6 @@ public class Rivit extends Kuvio {
             return true;
         }
         return false;
-    }
-    
-    public ArrayList<Kuvio> getKuviot() {
-        return this.kuviot;
-    }
-    
-    public ArrayList<Kuvio> getKuviotJoillaPalojaRivilla(int riviNro) {
-        ArrayList<Kuvio> kuviot = new ArrayList<Kuvio>();
-        for(Kuvio kuvio : this.kuviot) {
-            for(Pala pala : kuvio.getPalat()) {
-                if(pala.getY()==riviNro) {
-                    kuviot.add(kuvio);
-                    continue;
-                }
-            }
-        }
-        return kuviot;
-    }
-    
+    }  
     
 }

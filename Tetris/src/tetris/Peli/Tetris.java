@@ -1,8 +1,7 @@
-package tetris.peli;
+package tetris.Peli;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 import tetris.domain.Kuvio;
@@ -10,7 +9,10 @@ import tetris.domain.Nelio;
 import tetris.domain.Pala;
 import tetris.domain.Palkki;
 import tetris.domain.Rivit;
+import tetris.domain.jKirjain;
+import tetris.domain.lKirjain;
 import tetris.domain.sKirjain;
+import tetris.domain.tKirjain;
 import tetris.domain.zKirjain;
 import tetris.gui.Paivitettava;
 
@@ -18,7 +20,7 @@ import tetris.gui.Paivitettava;
  *
  * @author Johannes
  */
-public class Peli extends Timer implements ActionListener {
+public class Tetris extends Timer implements ActionListener {
 
     private Rivit rivit;
     private int leveys;
@@ -26,16 +28,16 @@ public class Peli extends Timer implements ActionListener {
     private Kuvio kuvio;
     private boolean peliKaynnissa;
     private Paivitettava paivitettava;
-    private PalojenKaanto kaanto;
+    private PalojenKaantoLogiikka kaanto;
 
-    public Peli(int leveys, int korkeus) {       
-        super(180, null);
+    public Tetris(int leveys, int korkeus) {       
+        super(150, null);
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
         this.kuvio = this.arvoKuvio();
         this.peliKaynnissa = true;
-        this.kaanto = new PalojenKaanto(rivit, leveys, korkeus);
+        this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
 
         addActionListener(this);
         setInitialDelay(500);       
@@ -45,15 +47,21 @@ public class Peli extends Timer implements ActionListener {
 
     //arpoo ja palauttaa uuden kuvion
     public Kuvio arvoKuvio() {
-        int arpa = new Random().nextInt(4);
+        int arpa = new Random().nextInt(7);
         if (arpa == 0) {
             return new Nelio(this.leveys / 2, -2);
         } else if (arpa == 1) {
             return new Palkki(this.leveys / 2, -3);
         } else if (arpa == 2) {
             return new zKirjain(this.leveys / 2, -1);
-        } else {
+        } else if (arpa == 1) {
             return new sKirjain(this.leveys / 2, -1);
+        } else if (arpa == 4) {
+            return new jKirjain(this.leveys / 2, -1);
+        } else if (arpa ==5) {
+            return new lKirjain(this.leveys / 2, -1);
+        } else {
+            return new tKirjain(this.leveys / 2, -1);
         }
     }
 
@@ -66,7 +74,7 @@ public class Peli extends Timer implements ActionListener {
                 for (Pala pala : this.kuvio.getPalat()) {
                     this.rivit.lisaaPala(new Pala(pala.getX(), pala.getY(), pala.getVarinNimi()));
                 }
-                this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain();
+                this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain(); //muokattava vielä, jos tippuneet palat täyttää rivin niin se ei tuhoudu
                 this.kuvio = this.arvoKuvio();
             }
 
@@ -83,20 +91,16 @@ public class Peli extends Timer implements ActionListener {
         for (int i = 0; i < this.korkeus; i++) {
             if (this.rivit.riviTaysi(i, leveys)) {
                 this.rivit.tuhoaRivi(i);               
-                this.pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(i);
+                this.pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(i);               
             }
         }
     }
 
     //pudottaa annetun rivin yläpuolisia paloja alaspäin niin kauan kunnes ne ovat kiinni jossain (vajaassa) rivissä tai lattiassa. 
     public void pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(int riviJonkaYlapuoleltaPudotetaan) {    
-        for (int j = riviJonkaYlapuoleltaPudotetaan + 1; j > 0; j--) {
+        for (int j = riviJonkaYlapuoleltaPudotetaan - 1; j > 0; j--) {
             for (Pala pala : this.rivit.getRivinPalat(j)) {
-                Kuvio pudotettavaPala = new Kuvio();
-                pudotettavaPala.lisaaPala(pala);
-                while (!this.putoavaKuvioAlimmallaRivilla(pudotettavaPala) && !this.kuvioKiinniJossainRivissa(pudotettavaPala)) {
-                    pala.pudotaYhdella();
-                }
+                    pala.pudotaYhdella();             
             }
         }
     }
@@ -171,7 +175,7 @@ public class Peli extends Timer implements ActionListener {
 
     public void kaannaKuviota() {
         if (this.kaanto.putoavaaKuviotaVoiKaantaa(this.kuvio)) {
-            this.getKuvio().kaanna();
+            this.kuvio.kaanna();
         }
     }
 

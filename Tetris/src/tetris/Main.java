@@ -3,7 +3,7 @@ package tetris;
 
 import javax.swing.SwingUtilities;
 import tetris.gui.Kayttoliittyma;
-import tetris.peli.Peli;
+import tetris.Peli.Tetris;
 
 
 
@@ -18,9 +18,9 @@ public class Main {
 
     public static void main(String[] args) {
         
-        Peli testi = new Peli(15, 20);
+        Tetris testi = new Tetris(15, 20);
         
-        Kayttoliittyma kali = new Kayttoliittyma(testi, 20);                     //toinen parametri palan sivun pituus
+        Kayttoliittyma kali = new Kayttoliittyma(testi, 20);  //toinen parametri palan sivun pituus
         SwingUtilities.invokeLater(kali);
         
 
