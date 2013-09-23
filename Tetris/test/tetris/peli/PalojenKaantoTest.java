@@ -22,7 +22,7 @@ public class PalojenKaantoTest {
     
     
     //muokkaa riippumattomaksi luokasta tetris
-    Tetris tetris;
+    Peli tetris;
     PalojenKaanto kaanto;
     
     public PalojenKaantoTest() {
@@ -38,7 +38,7 @@ public class PalojenKaantoTest {
     
     @Before
     public void setUp() {
-        tetris=new Tetris(15,20);
+        tetris=new Peli(15,20);
         kaanto=new PalojenKaanto(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
     }
     

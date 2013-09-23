@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import tetris.domain.Pala;
-import tetris.peli.Tetris;
+import tetris.peli.Peli;
 
 /**
  *
@@ -12,10 +12,10 @@ import tetris.peli.Tetris;
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
-    private Tetris tetris;
+    private Peli tetris;
     private int palanPituus;
 
-    public Piirtoalusta(Tetris tetris, int palanPituus) {
+    public Piirtoalusta(Peli tetris, int palanPituus) {
         this.tetris = tetris;
         this.palanPituus = palanPituus;
     }

@@ -18,7 +18,7 @@ import tetris.gui.Paivitettava;
  *
  * @author Johannes
  */
-public class Tetris extends Timer implements ActionListener {
+public class Peli extends Timer implements ActionListener {
 
     private Rivit rivit;
     private int leveys;
@@ -28,8 +28,8 @@ public class Tetris extends Timer implements ActionListener {
     private Paivitettava paivitettava;
     private PalojenKaanto kaanto;
 
-    public Tetris(int leveys, int korkeus) {
-        super(80, null);
+    public Peli(int leveys, int korkeus) {       
+        super(180, null);
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
@@ -38,7 +38,8 @@ public class Tetris extends Timer implements ActionListener {
         this.kaanto = new PalojenKaanto(rivit, leveys, korkeus);
 
         addActionListener(this);
-        setInitialDelay(500);
+        setInitialDelay(500);       
+        
 
     }
 

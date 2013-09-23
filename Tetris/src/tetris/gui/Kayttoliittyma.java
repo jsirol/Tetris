@@ -5,7 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.peli.Tetris;
+import tetris.peli.Peli;
 
 /**
  *
@@ -14,11 +14,11 @@ import tetris.peli.Tetris;
 public class Kayttoliittyma implements Runnable {
     
     private JFrame frame;
-    private Tetris tetris;
+    private Peli tetris;
     private int palanPituus;
     private Piirtoalusta piirtoalusta;
     
-    public Kayttoliittyma(Tetris tetris, int sivunPituus) {
+    public Kayttoliittyma(Peli tetris, int sivunPituus) {
         this.tetris=tetris;
         this.palanPituus=sivunPituus;
     }

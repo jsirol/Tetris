@@ -19,11 +19,11 @@ import tetris.domain.Palkki;
  *
  * @author Johannes
  */
-public class TetrisTest {
+public class PeliTest {
 
-    Tetris tetris;
+    Peli tetris;
 
-    public TetrisTest() {
+    public PeliTest() {
     }
 
     @BeforeClass
@@ -36,7 +36,7 @@ public class TetrisTest {
 
     @Before
     public void setUp() {
-        tetris = new Tetris(20, 30);
+        tetris = new Peli(20, 30);
         this.taytaKaksiAlintaRivia();
         this.tetris.getRivit().lisaaPala(new Pala(7, 5, Vari.KELTAINEN));
     }
