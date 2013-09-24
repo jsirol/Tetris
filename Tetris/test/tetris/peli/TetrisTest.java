@@ -47,15 +47,15 @@ public class TetrisTest {
     }
 
     @Test
-    public void metodiPudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyyToimiiOikein() {
-        peli.pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(29);
-        assertEquals("[(7,27)]", this.peli.getRivit().getRivinPalat(27).toString());
+    public void metodipudotaYlempanaOlevienRivienPalojaYhdellaToimiiOikein() {
+        peli.pudotaYlempanaOlevienRivienPalojaYhdella(29);
+        assertEquals("[(7,6)]", this.peli.getRivit().getRivinPalat(6).toString());
     }
     
     @Test
-    public void metodituhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspainToimiiOikein() {
-        peli.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain();
-        assertEquals("[(7,29)]", this.peli.getRivit().getRivinPalat(29).toString());
+    public void metodituhoaTaydetRivitJaJaPudotaYlempanaOleviaPalojaAlaspainToimiiOikein() {
+        peli.tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain();
+        assertEquals("[(7,7)]", this.peli.getRivit().getRivinPalat(7).toString());
     }
     
     @Test

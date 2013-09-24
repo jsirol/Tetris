@@ -74,7 +74,7 @@ public class Tetris extends Timer implements ActionListener {
                 for (Pala pala : this.kuvio.getPalat()) {
                     this.rivit.lisaaPala(new Pala(pala.getX(), pala.getY(), pala.getVarinNimi()));
                 }
-                this.tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain(); //muokattava vielä, jos tippuneet palat täyttää rivin niin se ei tuhoudu
+                this.tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain(); //muokattava vielä, jos tippuneet palat täyttää rivin niin se ei tuhoudu
                 this.kuvio = this.arvoKuvio();
             }
 
@@ -86,18 +86,18 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-    //tuhoaa täydet rivit ja kutsuu metodia pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy.
-    public void tuhoaTaydetRivitJaTarvittaessaPudotaYlempanaOleviaPalojaAlaspain() {
+    //tuhoaa täydet rivit ja pudottaa ylempänä olevia paloja alaspäin
+    public void tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain() {
         for (int i = 0; i < this.korkeus; i++) {
             if (this.rivit.riviTaysi(i, leveys)) {
                 this.rivit.tuhoaRivi(i);               
-                this.pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(i);               
+                this.pudotaYlempanaOlevienRivienPalojaYhdella(i);               
             }
         }
     }
 
-    //pudottaa annetun rivin yläpuolisia paloja alaspäin niin kauan kunnes ne ovat kiinni jossain (vajaassa) rivissä tai lattiassa. 
-    public void pudotaYlempanaOlevienRivienPalojaNiinPaljonKuinPystyy(int riviJonkaYlapuoleltaPudotetaan) {    
+    //pudottaa annetun rivin yläpuolisia paloja alaspäin yhden koordinaatin verran
+    public void pudotaYlempanaOlevienRivienPalojaYhdella(int riviJonkaYlapuoleltaPudotetaan) {    
         for (int j = riviJonkaYlapuoleltaPudotetaan - 1; j > 0; j--) {
             for (Pala pala : this.rivit.getRivinPalat(j)) {
                     pala.pudotaYhdella();             
