@@ -195,7 +195,7 @@ public class Kuvio implements Kaantyva {
      * Rajapinnalta Kaantyva perittävä metodi, joka palauttaa rotaatiopisteenä olevan palan.
      * Toteutetaan aliluokille.
      * 
-     * @return 
+     * @return palauttaa rotaatiopisteenä olevan palan, oletuksena null
      * 
      * @see  tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala() 
      * @see  tetris.domain.Palkki#getRotaatioPisteenaOlevaPala() 

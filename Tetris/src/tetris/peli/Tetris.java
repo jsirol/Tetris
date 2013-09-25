@@ -104,12 +104,12 @@ public class Tetris extends Timer implements ActionListener {
      *
      * @param e tapahtuma
      *
-     * @see tetris.Peli.Tetris#putoavaKuvioAlimmallaRivilla(tetris.domain.Kuvio)
-     * @see tetris.Peli.Tetris#kuvioKiinniYlimmassaRivissa(tetris.domain.Kuvio)
-     * @see tetris.Peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioKiinniYlimmassaRivissa(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
      * @see
-     * tetris.Peli.Tetris#tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain()
-     * @see tetris.Peli.Tetris#arvoKuvio()
+     * tetris.peli.Tetris#tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain()
+     * @see tetris.peli.Tetris#arvoKuvio()
      * @see tetris.domain.Kuvio#pudotaYhdella()
      */
     @Override
@@ -136,7 +136,7 @@ public class Tetris extends Timer implements ActionListener {
      * Metodi tuhoaa täydet rivit ja pudottaa ylempien rivien paloja alaspäin
      * yhden koordinaatin verran.
      *
-     * @see tetris.Peli.Tetris#pudotaYlempanaOlevienRivienPalojaYhdella(int)
+     * @see tetris.peli.Tetris#pudotaYlempanaOlevienRivienPalojaYhdella(int)
      * @see tetris.domain.Rivit#tuhoaRivi(int)
      * @see tetris.domain.Rivit#riviTaysi(int, int)
      */
@@ -194,7 +194,7 @@ public class Tetris extends Timer implements ActionListener {
      * @return totuusarvo sille, onko kuvio kiinni ylimmässä rivissä
      *
      * @see tetris.domain.Kuvio#getPalaJollaPieninYKoordinaatti()
-     * @see tetris.Peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
      */
     public boolean kuvioKiinniYlimmassaRivissa(Kuvio kuvio) {
         if (kuvio.getPalaJollaPieninYKoordinaatti().getY() <= 0 && this.kuvioKiinniJossainRivissa(kuvio)) {
@@ -211,7 +211,7 @@ public class Tetris extends Timer implements ActionListener {
      *
      * @return totuusarvo sille, onko kuvio kiinni jossakin rivissä
      *
-     * @see tetris.Peli.Tetris#kuvioKiinniTietyssaRivissa(int,
+     * @see tetris.peli.Tetris#kuvioKiinniTietyssaRivissa(int,
      * tetris.domain.Kuvio)
      */
     public boolean kuvioKiinniJossainRivissa(Kuvio kuvio) {
@@ -278,7 +278,7 @@ public class Tetris extends Timer implements ActionListener {
      *
      * @see tetris.domain.Kuvio#getPalaJollaPieninXKoordinaatti()   
      * @see tetris.domain.Kuvio#siirraKuviotaSivuttain(int)
-     * @see tetris.Peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
+     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
      */
     public void liikutaKuviotaVasemmalle() {
         if (this.kuvio.getPalaJollaPieninXKoordinaatti().getX() != 0 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(-1)) {
@@ -292,7 +292,7 @@ public class Tetris extends Timer implements ActionListener {
      *     
      * @see tetris.domain.Kuvio#getPalaJollaSuurinXKoordinaatti()
      * @see tetris.domain.Kuvio#siirraKuviotaSivuttain(int)
-     * @see tetris.Peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
+     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
      */
     public void liikutaKuviotaOikealle() {
         if (this.kuvio.getPalaJollaSuurinXKoordinaatti().getX() != this.leveys - 1 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(1)) {
@@ -307,8 +307,8 @@ public class Tetris extends Timer implements ActionListener {
      * @param kuvio pudotettava kuvio
      * 
      * @see tetris.domain.Kuvio#pudotaYhdella() 
-     * @see tetris.Peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
-     * @see tetris.Peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
      */
     public void pudotaKuviotaAlasYhdellaJosVoi(Kuvio kuvio) {
         if (!this.kuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
@@ -319,7 +319,7 @@ public class Tetris extends Timer implements ActionListener {
     /**
      * Metodi tarkistaa voiko kuviota kääntää ja jos voi, kääntää sitä.
      * 
-     * @see tetris.Peli.PalojenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio) 
+     * @see tetris.peli.PalojenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio) 
      * @see tetris.domain.Kuvio#kaanna() 
      */
     public void kaannaKuviota() {
@@ -334,9 +334,9 @@ public class Tetris extends Timer implements ActionListener {
      * 
      * @param kuvio pudotettava kuvio
      * 
-     * @see tetris.Peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
-     * @see tetris.Peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
-     * @see tetris.Peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio) 
      */
     public void pudotaKuvioNiinAlasKuinVoi(Kuvio kuvio) {
         while (true) {
