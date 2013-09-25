@@ -42,6 +42,12 @@ Tehty loputkin kuvion alaluokista ja toteutettu niille kääntölogiikka. Huomattu 
 
 *käytetty aika 7h
 
+26.9.2013
+----------
+Laadittu sekvenssikaavioita yksinkertaisista käyttötapauksista. Kirjoitettu javadoc tähän astisesta toteutuksesta. Kirjoitettu lisää testejä. Testattu myös manuaalisesti pelaamalla peliä (myös muina päivinä satunnaisesti)
+
+*käytetty aika 8h
+
 
 
 
