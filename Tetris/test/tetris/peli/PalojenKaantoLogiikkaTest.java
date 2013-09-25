@@ -22,13 +22,13 @@ import tetris.domain.zKirjain;
  *
  * @author Johannes
  */
-public class PalojenKaantoTest {
+public class PalojenKaantoLogiikkaTest {
 
     //muokkaa riippumattomaksi luokasta tetris
     Tetris tetris;
     PalojenKaantoLogiikka kaanto;
 
-    public PalojenKaantoTest() {
+    public PalojenKaantoLogiikkaTest() {
     }
 
     @BeforeClass
