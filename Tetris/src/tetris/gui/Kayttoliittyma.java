@@ -5,17 +5,34 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.Peli.Tetris;
+import tetris.peli.Tetris;
 
 /**
- *
+ *Luokassa määritellään minkälainen käyttöliittymä pelissä on.
+ * 
  * @author Johannes
  */
 public class Kayttoliittyma implements Runnable {
     
+    /**
+     * Käyttöliittymän kehys.
+     */
     private JFrame frame;
+    
+    /**
+     * Käyttöliittymään liittyvä peli
+     */
     private Tetris tetris;
+    
+    /**
+     * Yksittäisen palan sivun pituus, 
+     * joka määrittää osaltaan miten iso käyttöliittymästä luodaan
+     */
     private int palanPituus;
+    
+    /**
+     * Piirtoalusta johon piirretään pelissä tarvittavat objektit.
+     */
     private Piirtoalusta piirtoalusta;
     
     public Kayttoliittyma(Tetris tetris, int sivunPituus) {
@@ -23,6 +40,10 @@ public class Kayttoliittyma implements Runnable {
         this.palanPituus=sivunPituus;
     }
 
+    /**
+     * Metodi määrittelee mitä tapahtuu kun peli käynnistetään.
+     * 
+     */
     @Override
     public void run() {
         frame = new JFrame("Tetris");
@@ -35,6 +56,12 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * Metodi joka luo piirtoalustan ja lisää sen käyttöliittymäkehykseen.
+     * Lisäksi kehykseen asetetaan näppäimistönkuuntelija.
+     * 
+     * @param container objekti johon piirtoalusta lisätään
+     */
     private void luoKomponentit(Container container) {
         piirtoalusta = new Piirtoalusta(tetris, palanPituus);
         container.add(piirtoalusta);

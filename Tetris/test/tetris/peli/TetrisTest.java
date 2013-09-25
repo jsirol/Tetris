@@ -4,7 +4,6 @@
  */
 package tetris.peli;
 
-import tetris.Peli.Tetris;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -60,9 +59,9 @@ public class TetrisTest {
     
     @Test
     public void metodiPutoavaKuvioAlimmallaRivillaToimiiOikein() {
-        assertEquals(false, peli.putoavaKuvioAlimmallaRivilla(peli.getKuvio()));
+        assertEquals(false, peli.kuvioAlimmallaRivilla(peli.getKuvio()));
         peli.setKuvio(new Palkki(4,27));
-        assertEquals(true, peli.putoavaKuvioAlimmallaRivilla(peli.getKuvio()));
+        assertEquals(true, peli.kuvioAlimmallaRivilla(peli.getKuvio()));
     }
     
     @Test

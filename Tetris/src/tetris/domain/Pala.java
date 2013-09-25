@@ -1,21 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tetris.domain;
 
 import java.awt.Color;
 import tetris.Vari;
 
 /**
- *
+ *Luokka sisältää määrittelyn paloille, 
+ *jotka toimivat Tetris pelin osina muodostaen erilaisia kuvioita.
+ * 
+ * @see tetris.domain.Kuvio
+ * 
  * @author Johannes
  */
 public class Pala {
 
-    private int x;             //palan x-koordinaatti
-    private int y;             //palan y-koordinaatti
-    private Vari vari;         //palan väri
+    /**
+     * Palan x-koordinaatin arvo.
+     */
+    private int x;      
+    /**
+     * Palan y-koordinaatin arvo.
+     */
+    private int y;   
+    /**
+     * Palan väri.
+     */
+    private Vari vari;         
 
     public Pala(int x, int y, Vari vari) {
         this.x = x;
@@ -31,12 +41,24 @@ public class Pala {
         return this.y;
     }
 
-    //palauttaa palan värin
+    /**
+     * Metodi palauttaa palan todellisen värin.
+     * 
+     * @see tetris.domain.Pala#getVarinNimi()   
+     * 
+     * @return palan väri
+     */
     public Color getVari() {
         return this.vari.getVari();
     }
 
-    //palauttaa värin nimen, esim. KELTAINEN. Testausta varten.
+    /**
+     * Metodi palauttaa pala värin nimen.
+     * 
+     * @see tetris.domain.Pala#getVari() 
+     * 
+     * @return palan värin nimi       
+     */
     public Vari getVarinNimi() {
         return this.vari;
     }
@@ -54,12 +76,21 @@ public class Pala {
         this.setY(y);
     }
 
-    //pudottaa palan yhden koordinaatin verran alaspäin
+    /**
+     * Metodi asettaa palan sijainnin y-koordinaatille arvon, joka on tämänhetkisen y-koordinaatin arvo +1.
+     */
     public void pudotaYhdella() {
         this.setSijainti(this.x, this.y + 1);
     }
 
-    //tarkistaa onko palan oikealla tai vasemmalla puolella palaa
+    /**
+     * Metodi saa parametrinaan suunnan, josta tarkistetaan onko toisena parametrina olevan pala palan vieressä.
+     * 
+     * @param negatiivenOnVasenMuutenOikea suunta, negatiivinen tarkoittaa vasenta ja positiivinen oikeaa.
+     * @param verrattava pala josta tarkistetaan, onko se metodia kutsuvan palan vieressä
+     * 
+     * @return totuusarvo, onko verrattava pala metodia kutsuvan palan vieressä
+     */   
     public boolean vieressaOnPala(int negatiivenOnVasenMuutenOikea, Pala verrattava) {
         if (negatiivenOnVasenMuutenOikea < 0) {
             if (this.getX() - 1 == verrattava.getX() && this.getY() == verrattava.getY()) {
@@ -71,7 +102,11 @@ public class Pala {
         return false;
     }
 
-    //palan merkkijonoesitys muodossa (x,y)
+    /**
+     * Metodi palauttaa palan merkkijonoesityksen.
+     * 
+     * @return palan merkkijonoesitys
+     */
     @Override
     public String toString() {
         return "(" + this.getX() + "," + this.getY() + ")";

@@ -2,7 +2,7 @@ package tetris.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tetris.Peli.Tetris;
+import tetris.peli.Tetris;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (this.tetris.peliKaynnissa()) {
+        if (this.tetris.getPeliKaynnissa()) {
             if (!this.keskeytetty) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     this.tetris.kaannaKuviota();

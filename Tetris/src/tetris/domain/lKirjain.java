@@ -3,7 +3,12 @@ package tetris.domain;
 import tetris.Vari;
 
 /**
- *
+ * Luokka perii luokan LjaJmuotti ja määrittää tarkemmin minkälainen kuvio on L-kirjain.
+ * L-kirjain koostuu neljästä palasta, jotka on aseteltu L-kirjaimen muotoon.
+ * Konstruktorin parametrina annetaan rotaatiopalan sijainti.
+ * Kuvion säilyttävään ArrayListiin lisätään ensimmäiselle paikalle L-kirjaimen asennon identifioiva pala.
+ * Rotaatiopala tallennetaan ArrayListin paikkaan 2.
+ * 
  * @author Johannes
  */
 public class lKirjain extends LjaJmuotti {
@@ -17,6 +22,13 @@ public class lKirjain extends LjaJmuotti {
         super.lisaaPala(new Pala(x + 1, y, keltainen));
     }
 
+     /**
+     * Metodi kääntää L kirjainta 90 asteen verran vastapäivään.
+     * 
+     * @see tetris.domain.LjaJmuotti#getAsento() 
+     * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala() 
+     * @see tetris.domain.LjaJmuotti#kaanna()         
+     */
     @Override
     public void kaanna() {
         int asento = super.getAsento();

@@ -4,12 +4,14 @@ package tetris.domain;
 import tetris.Vari;
 
 /**
- *
+ * Luokka perii Kuvio-luokan ja määrittelee tarkemmin minkälainen on Neliö-kuvio.
+ * Neliössä on 4 palaa neliön muodossa.
+ * Konstruktorille annettavat palat määräävät neliön vasemman yläkulman palan sijainnin.
+ * 
  * @author Johannes
  */
 
 
-//nelio on kuvio jossa on neliön muodossa 4 palaa. Konstruktorissa annettavat parametrit määrittävät neliön vasemman yläkulman palan.
 public class Nelio extends Kuvio {
     
         public Nelio(int x, int y) {     

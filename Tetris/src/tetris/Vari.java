@@ -3,7 +3,8 @@ package tetris;
 import java.awt.Color;
 
 /**
- *
+ *Rajapintaluokka määrittelee Tetriksen paloille värivaihtoehdot.
+ * 
  * @author Johannes
  */
 public enum Vari {
@@ -16,9 +17,16 @@ public enum Vari {
     HARMAA(Color.GRAY),
     SININEN(Color.BLUE);    
     
-    
+    /**
+     * Olion väri.
+     */
     private Color vari;
 
+    /**
+     * Metodi asettaa olion väriksi parametrina annetun värin.
+     * 
+     * @param vari 
+     */
     private Vari(Color vari) {
         this.vari = vari;
     }

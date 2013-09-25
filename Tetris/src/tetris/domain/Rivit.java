@@ -1,14 +1,22 @@
 package tetris.domain;
 
 /**
- *
+ *Luokka perii Kuvio-luokan ja sisältää tiedot Tetriksen pelialueen mitoista, 
+ * sekä siitä, mitä paloja pelialueen riveissä kullakin hetkellä on.
+ * 
  * @author Johannes
  */
-//luokasta luotu olio pitää sisällään tiedot tetriksen pelialueen mitoista, sekä siitä, mitä paloja pelialueen riveissä kullakin hetkellä on.
-//huomaa: rivit tallennettaan "kuviomuodossa" eli palat eivät ole järjestyksessä yliluokan ArrayList:issä.
+
 public class Rivit extends Kuvio {
 
+    /**
+     * Tetriksen pelialueen leveys.
+     */ 
     private int leveys;
+    
+    /**
+     * Tetriksen pelialueen korkeus.
+     */  
     private int korkeus;
     
 
@@ -18,13 +26,31 @@ public class Rivit extends Kuvio {
         this.korkeus = korkeus;
     }
 
+    /**
+     * Metodi poistaa rivit muodostavasta kuviosta metodin parametrina annetulla rivillä sijaitsevat palat.
+     * 
+     * @param y rivinumero
+     * 
+     * @see tetris.domain.Kuvio#poistaPala(tetris.domain.Pala) 
+     */
     public void tuhoaRivi(int y) {
         for (Pala pala : super.getRivinPalat(y)) {
             super.poistaPala(pala);
         }
     }
 
-    //palauttaa true jos rivi rivinNro on täysi, muuten false.
+    /**
+     * Metodi ilmoittaa totuusarvolla, onko parametrina annettu rivi täysi. 
+     * Täyden rivin määrittää toisena parametrina annettava rivin leveys.
+     * 
+     * @param rivinNro tarkistettavan rivin järjestysnumero. Isompi arvo tarkoittaa alempaa riviä
+     * @param rivinLeveys tarkistettavan rivin leveys
+     * 
+     * @return totuusarvo sille, onko rivi täysi 
+     * 
+     * @see tetris.domain.Kuvio#getRivinPalat(int) 
+     * 
+     */
     public boolean riviTaysi(int rivinNro, int rivinLeveys) {
         if (this.getRivinPalat(rivinNro).size() == rivinLeveys) {
             return true;

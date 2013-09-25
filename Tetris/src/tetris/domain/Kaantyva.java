@@ -2,15 +2,21 @@
 package tetris.domain;
 
 /**
- *
+ *Rajapintaluokka määrittelee toiminnallisuuden Tetriksen kuvioille.
+ * 
  * @author Johannes
  */
 public interface Kaantyva {
     
-    //kääntää kääntyvää
+    /**
+     * Määrittää metodin, jonka on tarkoitus kääntää käännettävää kuviota.
+     */   
     public void kaanna();
     
-    //palauttaa palan joka on kaantyvan rotaatiopisteenä (pysyy paikallaan käännöksissä)
+    /**
+     * Metodi palauttaa paluuarvonaan palan, joka on kaantyvan kuvion rotaatiopisteenä (pysyy paikallaan käännöksissä).
+     * @return rotaatiopisteenä oleva pala
+     */    
     public Pala getRotaatioPisteenaOlevaPala();
    
 }

@@ -4,24 +4,34 @@ package tetris.domain;
 import tetris.Vari;
 
 /**
- *
+ * Luokka perii Kuvio-luokan ja määrittelee tarkemmin minkälainen on Palkki-kuvio.
+ * Palkki koostuu viidestä "palkin" muotoon asetellusta palasta 
+ * (ts. joko y- koordinaatti tai x-koordinaatti on palkin paloilla sama, riippuen palkin asennosta).
+ * Konstruktorin parametrit määrittävät rotaatiopisteenä olevan palan sijainnin.
+ * 
  * @author Johannes
  */
 
-//Palkki on 5 peräkkäin laitetun palan muodostama kuvio.  Palkki luodaan pystysuuntaisena ja konstruktorin parametrina annetaan rotaatiopisteen koordinaatit.
-public class Palkki extends Kuvio {
-    
+public class Palkki extends Kuvio {   
         public Palkki(int x, int y) {
         super();
         Vari punainen=Vari.PUNAINEN;
-        super.lisaaPala(new Pala(x,y-2,punainen));     //ylin tai vasen pala
+        super.lisaaPala(new Pala(x,y-2,punainen));     
         super.lisaaPala(new Pala(x,y-1, punainen));
-        super.lisaaPala(new Pala(x,y, punainen));      //rotaatiopiste tämän palan kohdalla 
+        super.lisaaPala(new Pala(x,y, punainen));       
         super.lisaaPala(new Pala(x,y+1, punainen));
-        super.lisaaPala(new Pala(x, y+2, punainen));   //alin tai oikea pala
+        super.lisaaPala(new Pala(x, y+2, punainen));   
     }
         
-        //kääntösuunta pysty-asennosta vaakaan tapahtuu vastapäivään. vaaka-asennosta pysty-asentoon myötäpäivään.
+        /**
+         * Metodi suorittaa palkin kääntämisen. Palkkia käännetään pysty-asennosta vaaka-asentoon vastapäivään.
+         * Vaaka-asennosta pystyasentoon kääntäminen suoritetaan myötäpäivään.
+         * Käännös kääntää palkkia 90 astetta.
+         * 
+         * @see tetris.domain.Palkki#kaannaPystystaVaakaan() 
+         * @see tetris.domain.Palkki#kaannaVaastaPystyyn() 
+         * 
+         */
         @Override
         public void kaanna() {
             if(this.onVaakaAsennossa()) {
@@ -31,7 +41,11 @@ public class Palkki extends Kuvio {
             }
         }
         
-        //palauttaa true jos palkki on "vaaka-asennossa", muuten false
+        /**
+         * Metodi kertoo onko palkki vaaka-asennossa palauttamalla tätä tilannetta vastaavan totuusarvon.
+         * 
+         * @return totuusarvo, onko palkki vaaka-asennossa 
+         */      
         public boolean onVaakaAsennossa() {           
             if(super.onkoKuviossaTietyssaKoordinaatissaJoPala(this.getRotaatioPisteenaOlevaPala().getX()-2, this.getRotaatioPisteenaOlevaPala().getY())) {
                 return true;
@@ -39,7 +53,13 @@ public class Palkki extends Kuvio {
             return false;
         }
         
-        //kääntää palkin pysty-asennosta vaaka-asentoon
+        /**
+         * Metodi kääntää palan vaaka-asennosta pystyasentoon.
+         * Kääntäminen tapahtuu myötäpäivään ja kääntökulma on 90 astetta.
+         * 
+         * @see tetris.domain.Palkki#getRotaatioPisteenaOlevaPala() 
+         * 
+         */      
         public void kaannaVaastaPystyyn() {
             int i=-2;
             for(Pala pala : this.getPalat()) {
@@ -49,7 +69,13 @@ public class Palkki extends Kuvio {
             }
         }
         
-        //kääntää palkin vaaka-asennosta pysty-asentoon
+        /**
+         * Metodi kääntää palan pystyasennosta vaaka-asentoon.
+         * Kääntäminen tapahtuu myötäpäivään ja kääntökulma on 90 astetta.
+         * 
+         * @see tetris.domain.Palkki#getRotaatioPisteenaOlevaPala() 
+         * 
+         */
         public void kaannaPystystaVaakaan() {
             int i=-2;                                      
             for(Pala pala : this.getPalat()) {
@@ -59,6 +85,11 @@ public class Palkki extends Kuvio {
             }
         }
             
+        /**
+         * Metodi palauttaa palkin rotaatiopisteenä olevan palan.
+         * 
+         * @return rotaatiopisteenä oleva pala 
+         */
         @Override
         public Pala getRotaatioPisteenaOlevaPala() {
             return this.getPalat().get(2);
