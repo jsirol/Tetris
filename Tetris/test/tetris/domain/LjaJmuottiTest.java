@@ -47,10 +47,24 @@ public class LjaJmuottiTest {
     }
     
     @Test
+    public void metoditKaannaPaaAkseliVaakaanJaKaannaPaaAkseliPystyynToimivatOikein() {
+        j.kaannaPaaAkseliVaakaan();
+        assertEquals("(8,10),(9,10),(10,10)", this.kolmenEnsimmaisenPalanMerkkijonoEsitys(j));
+        j.kaannaPaaAkseliPystyyn();
+        assertEquals("(10,12),(10,11),(10,10)", this.kolmenEnsimmaisenPalanMerkkijonoEsitys(j));
+        j.kaannaPaaAkseliVaakaan();
+        assertEquals("(12,10),(11,10),(10,10)", this.kolmenEnsimmaisenPalanMerkkijonoEsitys(j));
+        j.kaannaPaaAkseliPystyyn();
+        assertEquals("(10,8),(10,9),(10,10)", this.kolmenEnsimmaisenPalanMerkkijonoEsitys(j));
+    }
+    
+    @Test
     public void metodiGetRotaatioPisteenaOlevaPalaToimiiOikein() {
         assertEquals("(10,10)", j.getRotaatioPisteenaOlevaPala().toString());
     }
     
-    
+    private String kolmenEnsimmaisenPalanMerkkijonoEsitys(LjaJmuotti kirjain) {
+       return kirjain.getPalat().get(0).toString()+","+kirjain.getPalat().get(1).toString()+","+kirjain.getPalat().get(2).toString();
+    }
     
 }

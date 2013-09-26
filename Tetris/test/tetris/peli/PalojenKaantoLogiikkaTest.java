@@ -59,6 +59,8 @@ public class PalojenKaantoLogiikkaTest {
         assertEquals(false, kaanto.palkkiaVoiKaantaa((Palkki) tetris.getKuvio()));
     }
 
+    
+    //testataan muutamaa tilannetta
     @Test
     public void metodiPutoavaaKuviotaVoiKaantaaToimii() {
         this.taytaKaksiAlintaRivia();

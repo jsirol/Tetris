@@ -5,12 +5,21 @@ import java.awt.event.KeyListener;
 import tetris.peli.Tetris;
 
 /**
- *
+ * Luokka määrittelee näppäimistönkuuntelijan ja sen toiminnallisuuden.
+ * 
  * @author Johannes
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
+    /**
+     * kuunneltava objekti
+     */
     private Tetris tetris;
+    
+    /**
+     * muuttuja sisältää tiedon siitä, 
+     * onko peli keskeytetty (huom! eri kuin loppunut)
+     */
     private boolean keskeytetty;
 
     public Nappaimistonkuuntelija(Tetris tetris) {
@@ -18,6 +27,20 @@ public class Nappaimistonkuuntelija implements KeyListener {
         this.keskeytetty = false;
     }
 
+    /**
+     * Metodi määrittelee mitä tapahtuu 
+     * kun tiettyjä näppäimiä painetaan näppäimistöllä.
+     * 
+     * @param e näppäimen painallus
+     * 
+     * @see tetris.peli.Tetris#kaannaKuviota() 
+     * @see tetris.peli.Tetris#pudotaKuvioNiinAlasKuinVoi(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#liikutaKuviotaVasemmalle() 
+     * @see tetris.peli.Tetris#liikutaKuviotaOikealle() 
+     * @see tetris.peli.Tetris#pudotaKuvioNiinAlasKuinVoi(tetris.domain.Kuvio) 
+     * @see tetris.peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio) 
+     * @see tetris.gui.Nappaimistonkuuntelija#keskeytaTaiJatkaPelia() 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (this.tetris.getPeliKaynnissa()) {
@@ -35,7 +58,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                this.peliTauolle();
+                this.keskeytaTaiJatkaPelia();
             }
         }
     }
@@ -48,7 +71,11 @@ public class Nappaimistonkuuntelija implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
-    private void peliTauolle() {
+    /**
+     * Metodi keskeyttää tetriksen laskurin jos se on käynnissä.
+     * Jos laskuri ei ole käynnissä, metodi käynnistää sen.
+     */
+    private void keskeytaTaiJatkaPelia() {
         if (!this.keskeytetty) {
             this.tetris.stop();
             this.keskeytetty = true;
@@ -56,6 +83,5 @@ public class Nappaimistonkuuntelija implements KeyListener {
             this.tetris.start();
             this.keskeytetty = false;
         }
-
     }
 }
