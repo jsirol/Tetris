@@ -42,11 +42,23 @@ Tehty loputkin kuvion alaluokista ja toteutettu niille kääntölogiikka. Huomattu 
 
 *käytetty aika 7h
 
-26.9.2013
+25.9.2013
 ----------
 Laadittu sekvenssikaavioita yksinkertaisista käyttötapauksista. Kirjoitettu javadoc tähän astisesta toteutuksesta. Kirjoitettu lisää testejä. Testattu myös manuaalisesti pelaamalla peliä (myös muina päivinä satunnaisesti)
 
 *käytetty aika 8h
+
+26.9.2013
+----------
+Lisätty peliin vaikeustasot ja pistelasku. Laadittu päävalikko peliin ja testattu sen toimintaa.
+
+*käytetty aika 8h
+
+27.9.2013
+----------
+Muokattu päävalikkoa ja lisätty toiminnallisuutta siihen. Muokattu vaikeustasoja, joskin niiden osalta tehtävää vielä on, samoin kuin pistelaskun. Siistitty koodia ja kirjoitettu lisää javadoc uusille metodeille ja luokille. Testattu peliä manuaalisesti. 
+
+*Käytetty aika 10h
 
 
 
