@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.Vaikeustaso;
 import tetris.Vari;
 import tetris.domain.Kuvio;
 import tetris.domain.Pala;
@@ -36,7 +37,7 @@ public class TetrisTest {
 
     @Before
     public void setUp() {
-        peli = new Tetris(20, 30);
+        peli = new Tetris(20, 30, Vaikeustaso.EDISTYNYT);
         this.taytaKaksiAlintaRivia();
         this.peli.getRivit().lisaaPala(new Pala(7, 5, Vari.KELTAINEN));
     }
@@ -53,7 +54,7 @@ public class TetrisTest {
     
     @Test
     public void metodituhoaTaydetRivitJaJaPudotaYlempanaOleviaPalojaAlaspainToimiiOikein() {
-        peli.tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain();
+        peli.tuhoaTaydetRivitPudotaYlempanaOleviaPalojaAlaspainJaLisaaPisteet();
         assertEquals("[(7,7)]", this.peli.getRivit().getRivinPalat(7).toString());
     }
     

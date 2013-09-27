@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.Vaikeustaso;
 import tetris.Vari;
 import tetris.domain.Nelio;
 import tetris.domain.Pala;
@@ -41,7 +42,7 @@ public class PalojenKaantoLogiikkaTest {
 
     @Before
     public void setUp() {
-        tetris = new Tetris(15, 30);
+        tetris = new Tetris(15, 30, Vaikeustaso.EDISTYNYT);
         kaanto = new PalojenKaantoLogiikka(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
     }
 

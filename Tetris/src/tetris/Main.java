@@ -1,4 +1,3 @@
-
 package tetris;
 
 import javax.swing.SwingUtilities;
@@ -6,24 +5,20 @@ import tetris.gui.Kayttoliittyma;
 import tetris.peli.Tetris;
 
 /**
- * Luokka luo Tetriksen käynnistämiseen tarvittavat oliot ja käynnistää Tetris-pelin.
- * 
+ * Luokka luo Tetriksen käynnistämiseen tarvittavat oliot ja käynnistää
+ * Tetris-pelin.
+ *
  * @author Johannes
  */
-
-
-
-
 public class Main {
 
-
     public static void main(String[] args) {
-        
-        Tetris testi = new Tetris(15, 25);
-        
+
+        Tetris testi = new Tetris(15, 25, Vaikeustaso.VAUVA);
+
         Kayttoliittyma kayttis = new Kayttoliittyma(testi, 25);  //toinen parametri palan sivun pituus
         SwingUtilities.invokeLater(kayttis);
-        
+
 
         while (kayttis.getPaivitettava() == null) {
             try {
@@ -33,8 +28,7 @@ public class Main {
             }
         }
 
-        testi.setPaivitettava(kayttis.getPaivitettava()); 
-        testi.start();    
-        
+        testi.setPaivitettava(kayttis.getPaivitettava());
+
     }
 }

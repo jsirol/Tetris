@@ -3,7 +3,7 @@ package tetris;
 import java.awt.Color;
 
 /**
- *Rajapintaluokka määrittelee Tetriksen paloille värivaihtoehdot.
+ * Enum-luokka määrittelee Tetriksen paloille värivaihtoehdot.
  * 
  * @author Johannes
  */

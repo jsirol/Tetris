@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.Timer;
+import tetris.Vaikeustaso;
 import tetris.domain.Kuvio;
 import tetris.domain.Nelio;
 import tetris.domain.Pala;
@@ -35,11 +36,11 @@ public class Tetris extends Timer implements ActionListener {
     /**
      * pelialueen leveys
      */
-    private int leveys;
+    private final int leveys;
     /**
      * pelialueen korkeus
      */
-    private int korkeus;
+    private final int korkeus;
     /**
      * pelaajan ohjaama kuvio, joka putoaa tasaisesti pelialueen yläosasta
      * alaosaa kohti.
@@ -58,18 +59,34 @@ public class Tetris extends Timer implements ActionListener {
      * palojen kääntölogiikan sisältävä oliomuuttuja
      */
     private PalojenKaantoLogiikka kaanto;
+    /**
+     * pitää kirjaa pelaajalla olevista pisteistä
+     */
+    private int pisteet;
+    /**
+     * tetriksen vaikeustaso
+     */
+    private Vaikeustaso vaikeustaso;
+    /**
+     * Totuusarvo sille, onko juuri aloitettu uusi pelikierros. Käytetään
+     * identifioimaan tilanne, jolloin pelialue pitää piirtää tyhjäksi.
+     */
+    private boolean uusiKierrosAlkoi;
 
-    public Tetris(int leveys, int korkeus) {
-        super(120, null);
+    public Tetris(int leveys, int korkeus, Vaikeustaso taso) {
+        super(195, null);
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
         this.kuvio = this.arvoKuvio();
         this.peliKaynnissa = true;
         this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
+        this.vaikeustaso = taso;
+        this.pisteet = 0;
+        this.uusiKierrosAlkoi = false;
 
         addActionListener(this);
-        setInitialDelay(500);
+        setInitialDelay(750);
     }
 
     /**
@@ -97,6 +114,16 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
+    public void lisaaPisteita(int maara) {
+        this.pisteet += maara;
+    }
+
+    public void kasvataVaikeustasoa() {
+        if (this.vaikeustaso.getTasoNro() < 10 && this.pisteet > (this.vaikeustaso.getTasoNro() * 300)) {           //Hiottava kuntoon
+            this.setVaikeustaso(this.vaikeustaso.seuraavaksiVaikein());
+        }
+    }
+
     /**
      * Metodi määrittää mitä tapahtuu kun ohjelman käsiteltäväksi tulee uusi
      * tahtuma. Uusien tapahtumien syntymistiheyden määrä luokalle asetettu
@@ -115,13 +142,14 @@ public class Tetris extends Timer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.peliKaynnissa) {
+            this.uusiKierrosAlkoi = false;
             if (!this.kuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
                 kuvio.pudotaYhdella();
             } else {
                 for (Pala pala : this.kuvio.getPalat()) {
                     this.rivit.lisaaPala(new Pala(pala.getX(), pala.getY(), pala.getVarinNimi()));
                 }
-                this.tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain();
+                this.tuhoaTaydetRivitPudotaYlempanaOleviaPalojaAlaspainJaLisaaPisteet();
                 this.kuvio = this.arvoKuvio();
             }
             if (this.kuvioKiinniYlimmassaRivissa(kuvio)) {
@@ -134,19 +162,22 @@ public class Tetris extends Timer implements ActionListener {
 
     /**
      * Metodi tuhoaa täydet rivit ja pudottaa ylempien rivien paloja alaspäin
-     * yhden koordinaatin verran.
+     * yhden koordinaatin verran. Lisäksi jokaista tuhottua riviä kohti lisätään
+     * pelaajalle pisteitä.
      *
      * @see tetris.peli.Tetris#pudotaYlempanaOlevienRivienPalojaYhdella(int)
      * @see tetris.domain.Rivit#tuhoaRivi(int)
      * @see tetris.domain.Rivit#riviTaysi(int, int)
      */
-    public void tuhoaTaydetRivitJaPudotaYlempanaOleviaPalojaAlaspain() {
+    public void tuhoaTaydetRivitPudotaYlempanaOleviaPalojaAlaspainJaLisaaPisteet() {
         for (int i = 0; i < this.korkeus; i++) {
             if (this.rivit.riviTaysi(i, leveys)) {
                 this.rivit.tuhoaRivi(i);
+                this.lisaaPisteita(100);
                 this.pudotaYlempanaOlevienRivienPalojaYhdella(i);
             }
         }
+        this.kasvataVaikeustasoa();
     }
 
     /**
@@ -276,9 +307,9 @@ public class Tetris extends Timer implements ActionListener {
      * Metodi tarkistaa voiko kuviota liikuttaa vasemmalle ja jos voi, liikuttaa
      * sitä vasemmalle.
      *
-     * @see tetris.domain.Kuvio#getPalaJollaPieninXKoordinaatti()   
+     * @see tetris.domain.Kuvio#getPalaJollaPieninXKoordinaatti()
      * @see tetris.domain.Kuvio#siirraKuviotaSivuttain(int)
-     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
+     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int)
      */
     public void liikutaKuviotaVasemmalle() {
         if (this.kuvio.getPalaJollaPieninXKoordinaatti().getX() != 0 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(-1)) {
@@ -286,13 +317,13 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-     /**
-     * Metodi tarkistaa voiko kuviota liikuttaa oikealle ja jos voi, 
-     * liikuttaa sitä oikealle.
-     *     
+    /**
+     * Metodi tarkistaa voiko kuviota liikuttaa oikealle ja jos voi, liikuttaa
+     * sitä oikealle.
+     *
      * @see tetris.domain.Kuvio#getPalaJollaSuurinXKoordinaatti()
      * @see tetris.domain.Kuvio#siirraKuviotaSivuttain(int)
-     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int) 
+     * @see tetris.peli.Tetris#kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(int)
      */
     public void liikutaKuviotaOikealle() {
         if (this.kuvio.getPalaJollaSuurinXKoordinaatti().getX() != this.leveys - 1 && this.kuviotaVoiSiirtaaSuuntaanOsumattaRiviin(1)) {
@@ -301,14 +332,14 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     /**
-     * Metodi tarkistaa voiko parametrina annettavaa kuviota pudottaa alaspäin yhden koordinaatin verran ja jos voi,
-     * pudottaa sitä yhden alaspäin.
-     * 
+     * Metodi tarkistaa voiko parametrina annettavaa kuviota pudottaa alaspäin
+     * yhden koordinaatin verran ja jos voi, pudottaa sitä yhden alaspäin.
+     *
      * @param kuvio pudotettava kuvio
-     * 
-     * @see tetris.domain.Kuvio#pudotaYhdella() 
-     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
-     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
+     *
+     * @see tetris.domain.Kuvio#pudotaYhdella()
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio)
      */
     public void pudotaKuviotaAlasYhdellaJosVoi(Kuvio kuvio) {
         if (!this.kuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
@@ -318,9 +349,10 @@ public class Tetris extends Timer implements ActionListener {
 
     /**
      * Metodi tarkistaa voiko kuviota kääntää ja jos voi, kääntää sitä.
-     * 
-     * @see tetris.peli.PalojenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio) 
-     * @see tetris.domain.Kuvio#kaanna() 
+     *
+     * @see
+     * tetris.peli.PalojenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio)
+     * @see tetris.domain.Kuvio#kaanna()
      */
     public void kaannaKuviota() {
         if (this.kaanto.putoavaaKuviotaVoiKaantaa(this.kuvio)) {
@@ -329,14 +361,15 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     /**
-     * Metodi pudottaa parametrina annettavan kuvion niin alas pelialueella kuin voi
-     * (ts. kunnes kuvio osuu johonkin riviin tai pelialueen alalaitaan).
-     * 
+     * Metodi pudottaa parametrina annettavan kuvion niin alas pelialueella kuin
+     * voi (ts. kunnes kuvio osuu johonkin riviin tai pelialueen alalaitaan).
+     *
      * @param kuvio pudotettava kuvio
-     * 
-     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio) 
-     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio) 
-     * @see tetris.peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio) 
+     *
+     * @see tetris.peli.Tetris#kuvioAlimmallaRivilla(tetris.domain.Kuvio)
+     * @see tetris.peli.Tetris#kuvioKiinniJossainRivissa(tetris.domain.Kuvio)
+     * @see
+     * tetris.peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio)
      */
     public void pudotaKuvioNiinAlasKuinVoi(Kuvio kuvio) {
         while (true) {
@@ -345,6 +378,17 @@ public class Tetris extends Timer implements ActionListener {
             } else {
                 break;
             }
+        }
+    }
+
+    /**
+     * Metodi poistaa pelialueen jokaisesta rivistä jokaisen palan.
+     * 
+     * @see tetris.domain.Rivit#tuhoaRivi(int) 
+     */
+    public void tuhoaKaikkiRivit() {
+        for (int i = 0; i < this.korkeus; i++) {
+            this.rivit.tuhoaRivi(i);
         }
     }
 
@@ -378,5 +422,56 @@ public class Tetris extends Timer implements ActionListener {
 
     public void setPelikaynnissa(boolean totuusarvo) {
         this.peliKaynnissa = totuusarvo;
+    }
+
+    public int getPisteet() {
+        return this.pisteet;
+    }
+
+    /**
+     * Metodi asettaa Tetrikseslle vaikeustason ja muuttaa sen mukaisesti
+     * pelinopeutta.
+     *
+     * @param vaikeustaso pelille asetettava vaikeustaso
+     */
+    public void setVaikeustaso(Vaikeustaso vaikeustaso) {
+        this.vaikeustaso = vaikeustaso;
+        if (vaikeustaso == Vaikeustaso.JUMALMOODI) {
+            this.setDelay(60);
+        } else if (vaikeustaso == Vaikeustaso.UBER) {
+            this.setDelay(75);
+        } else if (vaikeustaso == Vaikeustaso.KOVAKSIKEITETTY) {
+            this.setDelay(90);
+        } else if (vaikeustaso == Vaikeustaso.NOLIFE) {
+            this.setDelay(105);
+        } else if (vaikeustaso == Vaikeustaso.ERITTAINVAIKEA) {
+            this.setDelay(120);
+        } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
+            this.setDelay(135);
+        } else if (vaikeustaso == Vaikeustaso.EDISTYNYT) {
+            this.setDelay(150);
+        } else if (vaikeustaso == Vaikeustaso.NORMAALI) {
+            this.setDelay(165);
+        } else if (vaikeustaso == Vaikeustaso.HELPPO) {
+            this.setDelay(180);
+        } else {
+            this.setDelay(195);
+        }
+    }
+
+    public Vaikeustaso getVaikeustaso() {
+        return this.vaikeustaso;
+    }
+
+    public void nollaaPisteet() {
+        this.pisteet = 0;
+    }
+
+    public boolean getUusiKierrosAlkoi() {
+        return this.uusiKierrosAlkoi;
+    }
+
+    public void setUusiKierrosAlkoi(boolean kaynnissa) {
+        this.uusiKierrosAlkoi = kaynnissa;
     }
 }

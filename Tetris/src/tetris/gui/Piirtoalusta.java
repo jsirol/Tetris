@@ -44,15 +44,20 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * 
      * @see tetris.gui.Piirtoalusta#piirraPutoavaKuvio(java.awt.Graphics) 
      * @see tetris.gui.Piirtoalusta#piirraRivit(java.awt.Graphics) 
-     * @see tetris.gui.Piirtoalusta#piirraLopetusIlmoitus(java.awt.Graphics) 
+     * @see tetris.gui.Piirtoalusta#tyhjennaPelialue(java.awt.Graphics) 
      */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.piirraPutoavaKuvio(g);
         this.piirraRivit(g);
-        if (!tetris.getPeliKaynnissa()) {
-            this.piirraLopetusIlmoitus(g);
+        this.piirraPaavalikonErottavaViiva(g);
+        this.piirraAlareunanTyhjanTilanTayttavaViiva(g);
+        if(!tetris.getPeliKaynnissa()) {
+            this.piirraPelinPaattymisIlmoitus(g);
+        }
+        if (tetris.getUusiKierrosAlkoi()) {
+            this.tyhjennaPelialue(g);            
         }
     }
 
@@ -81,14 +86,43 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-     * Metodi määrittelee miten pelin päättyessä piirrettävä pelin päättymisen ilmaiseva viesti piirretään.
+     * Metodi tyhjentää piirtoalustan.
      * 
      * @param g komponentti johon piirretään 
      */
-    private void piirraLopetusIlmoitus(Graphics g) {
+    private void tyhjennaPelialue(Graphics g) {        
+        g.clearRect(0, 0, (tetris.getLeveys() + 1) * palanPituus, (tetris.getKorkeus() + 2) * palanPituus);
+    }
+    /**
+     * Metodi piirtää piirtoalustaan pelin päättyessä 
+     * ilmoituksen pelin päättymisestä ja ohjeet jatkamisesta.
+     * 
+     * @param g komponentti johon piirretään
+     */
+    private void piirraPelinPaattymisIlmoitus(Graphics g) {
+        g.setColor(Color.BLACK);    
+        g.drawString("PELI LOPPUI!", 6 * palanPituus, 8 * palanPituus);
+        g.drawString("PAINA MITÄ TAHANSA NÄPPÄINTÄ JATKAAKSESI", 2 * palanPituus, 10 * palanPituus);
+    }
+    
+    /**
+     * Metodi piirtää Paavalikon ja itse tetris pelin väliin pystysuoran viivan.
+     * 
+     * @param g komponentti johon piirretään
+     */
+    private void piirraPaavalikonErottavaViiva(Graphics g) {
         g.setColor(Color.BLACK);
-        char[] kirjaimet = {'P', 'E', 'L', 'I', ' ', ' ', ' ', ' ', ' ', 'L', 'O', 'P', 'P', 'U', 'I'};
-        g.drawChars(kirjaimet, 0, 15, 6 * palanPituus, 8 * palanPituus);
+        g.fillRect((tetris.getLeveys()) * palanPituus, 0, 10, (tetris.getKorkeus() + 2) * palanPituus);     
+    }
+    
+    /**
+     * Metodi piiraa piirtoalustan kehyksen alalaitaan viivan, 
+     * joka täyttää Tetriksen pelialueen alle jäävän tyhjän tilan.
+     * @param g 
+     */
+    private void piirraAlareunanTyhjanTilanTayttavaViiva(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, tetris.getKorkeus() * palanPituus, tetris.getLeveys() * palanPituus, 11);
     }
     
 }
