@@ -119,8 +119,9 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     public void kasvataVaikeustasoa() {
-        if (this.vaikeustaso.getTasoNro() < 10 && this.pisteet > (this.vaikeustaso.getTasoNro() * 300)) {           //Hiottava kuntoon
+        if (this.vaikeustaso.getTasoNro() < 10 && this.pisteet > (this.vaikeustaso.getTasoNro() * 100)) {           //Hiottava kuntoon
             this.setVaikeustaso(this.vaikeustaso.seuraavaksiVaikein());
+            System.out.println("vaikeustaso muuttunut");
         }
     }
 

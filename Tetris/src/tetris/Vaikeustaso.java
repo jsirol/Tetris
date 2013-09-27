@@ -44,9 +44,9 @@ public enum Vaikeustaso {
         } else if (tasoNro == 2) {
             return Vaikeustaso.HELPPO;
         } else if (tasoNro == 3) {
-            return Vaikeustaso.EDISTYNYT;
-        } else if (tasoNro == 4) {
             return Vaikeustaso.NORMAALI;
+        } else if (tasoNro == 4) {
+            return Vaikeustaso.EDISTYNYT;
         } else if (tasoNro == 5) {
             return Vaikeustaso.VAIKEA;
         } else if (tasoNro == 6) {

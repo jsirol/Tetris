@@ -184,7 +184,7 @@ public class Kayttoliittyma implements Runnable {
         valinnat.add(new JCheckBox("Vauva"));
         valinnat.add(new JCheckBox("Helppo"));
         valinnat.add(new JCheckBox("Normaali"));
-        valinnat.add(new JCheckBox("Edistynyt"));
+        valinnat.add(new JCheckBox("Edistynyt"));      
         valinnat.add(new JCheckBox("Vaikea"));
         valinnat.add(new JCheckBox("Erittäin vaikea"));
         valinnat.add(new JCheckBox("Kovaksi keitetty"));
