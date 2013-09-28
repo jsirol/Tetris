@@ -60,6 +60,12 @@ Muokattu p‰‰valikkoa ja lis‰tty toiminnallisuutta siihen. Muokattu vaikeustasoja
 
 *K‰ytetty aika 10h
 
+28.9.2013
+----------
+P‰ivitetty palkki nelj‰n ruudun mittaiseksi alkuper‰isest‰ viidest‰. Toteutettu toimiva pistelaskusysteemi, tasojen vaihto, sek‰ siistitty koodia n‰ilt‰ osin. P‰ivitetty luokkakaaviot ja jaettu iso luokkakaavio kahteen osaan. Testattu peli‰.
+
+*k‰ytetty aika 5h
+
 
 
 
