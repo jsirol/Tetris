@@ -90,6 +90,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
                 this.keskeytaTaiJatkaPelia();
             }
         } else {
+            this.vaihdaVaikeustasoRastitunRuudunMukaan();
             this.asetaValikkopainikkeilleTila(true);
         }
     }
@@ -163,7 +164,8 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      */
     private void paivitaTekstikentat() {
         pisteKentta.setText(this.pisteetMerkkijonona());
-        vaikeustasoKentta.setText(tetris.getVaikeustaso().toString());
+//        vaikeustasoKentta.setText(tetris.getVaikeustaso().toString());
+          vaikeustasoKentta.setText(tetris.getTasosysteemi().getVaikeustaso().toString());
     }
 
     /**
@@ -174,12 +176,9 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * @see tetris.peli.Tetris#nollaaPisteet()
      */
     private void alustaJaKaynnistaUusiPeli() {
-        tetris.tuhoaKaikkiRivit();
-        tetris.nollaaPisteet();
+        this.tetris.alustaJaAloitaUusiPeli();
         pisteKentta.setText(this.pisteetMerkkijonona());
-        tetris.setPelikaynnissa(true);
-        tetris.setUusiKierrosAlkoi(true);
-        tetris.restart();
+
     }
 
     private void vaihdaPelinVaikeustasoJaPaivitaVaikeustasoPainike() {
@@ -212,31 +211,31 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
     }
 
     /**
-     * Metdo vaihtaa Tetriksen vaikeustason sen mukaan, mikä
+     * Metodi vaihtaa Tetriksen vaikeustason sen mukaan, mikä
      * näppäimistönkuuntelijan kuuntelemista JCheckBox-olioista on valittuna.
      * Jos mikään ei ole valittuna, vaikeustasoksi asetetaan helpoin.
      */
     public void vaihdaVaikeustasoRastitunRuudunMukaan() {
-        if (this.valittuCheckBox() == null || this.valittuCheckBox().getText().equals("Vauva")) {
-            tetris.setVaikeustaso(Vaikeustaso.VAUVA);
+        if (this.valittuCheckBox() == null || this.valittuCheckBox().getText().equals("Aloittelija")) {
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.ALOITTELIJA);
         } else if (this.valittuCheckBox().getText().equals("Helppo")) {
-            tetris.setVaikeustaso(Vaikeustaso.HELPPO);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.HELPPO);
         } else if (this.valittuCheckBox().getText().equals("Normaali")) {
-            tetris.setVaikeustaso(Vaikeustaso.NORMAALI);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.NORMAALI);
         } else if (this.valittuCheckBox().getText().equals("Edistynyt")) {
-            tetris.setVaikeustaso(Vaikeustaso.EDISTYNYT);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.EDISTYNYT);
         } else if (this.valittuCheckBox().getText().equals("Vaikea")) {
-            tetris.setVaikeustaso(Vaikeustaso.VAIKEA);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.VAIKEA);
         } else if (this.valittuCheckBox().getText().equals("Erittäin vaikea")) {
-            tetris.setVaikeustaso(Vaikeustaso.ERITTAINVAIKEA);
-        } else if (this.valittuCheckBox().getText().equals("Nolife")) {
-            tetris.setVaikeustaso(Vaikeustaso.NOLIFE);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.ERITTAINVAIKEA);
         } else if (this.valittuCheckBox().getText().equals("Kovaksi keitetty")) {
-            tetris.setVaikeustaso(Vaikeustaso.KOVAKSIKEITETTY);
-        } else if (this.valittuCheckBox().getText().equals("Uber")) {
-            tetris.setVaikeustaso(Vaikeustaso.UBER);
-        } else if (this.valittuCheckBox().getText().equals("Jumalmoodi")) {
-            tetris.setVaikeustaso(Vaikeustaso.JUMALMOODI);
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.KOVAKSIKEITETTY);
+        } else if (this.valittuCheckBox().getText().equals("Nolife (Pro)")) {
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.NOLIFE);
+        } else if (this.valittuCheckBox().getText().equals("Uber (Pro)")) {
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.UBER);
+        } else if (this.valittuCheckBox().getText().equals("Jumalmoodi (Pro)")) {
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.JUMALMOODI);
         }
     }
 

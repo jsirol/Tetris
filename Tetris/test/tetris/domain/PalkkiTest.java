@@ -40,21 +40,21 @@ public class PalkkiTest {
 
     @Test
     public void palkkiLuodaanOikeaanPaikkaan() {
-        assertEquals("(5,-4), (5,-3), (5,-2), (5,-1), (5,0)", palkki.toString());
+        assertEquals("(5,-3), (5,-2), (5,-1), (5,0)", palkki.toString());
     }
 
     @Test
     public void getRotaatioPisteenaOlevaPalaPalauttaaOikeanPalan() {
-        Pala rotaatioPiste = palkki.getPalat().get(2);
+        Pala rotaatioPiste = palkki.getPalat().get(1);
         assertEquals(rotaatioPiste, palkki.getRotaatioPisteenaOlevaPala());
     }
 
     @Test
     public void metodiKaannaKaantaaPalkinOikein() {
         palkki.kaanna();
-        assertEquals("(3,-2), (4,-2), (5,-2), (6,-2), (7,-2)", palkki.toString());
+        assertEquals("(4,-2), (5,-2), (6,-2), (7,-2)", palkki.toString());
         palkki.kaanna();
-        assertEquals("(5,-4), (5,-3), (5,-2), (5,-1), (5,0)", palkki.toString());
+        assertEquals("(5,-3), (5,-2), (5,-1), (5,0)", palkki.toString());
     }
 
     @Test

@@ -93,7 +93,7 @@ public class TetrisTest {
     public void metodiPudotaPutoavaKuvioNiinAlasKuinVoiToimiiOikein() {
         peli.setKuvio(new Palkki(5,5));
         peli.pudotaKuvioNiinAlasKuinVoi(peli.getKuvio());
-        assertEquals("[(5,23), (5,24), (5,25), (5,26), (5,27)]", peli.getKuvio().getPalat().toString());
+        assertEquals("[(5,24), (5,25), (5,26), (5,27)]", peli.getKuvio().getPalat().toString());
     }
     
     

@@ -33,40 +33,58 @@ public class Tetris extends Timer implements ActionListener {
      * on tarkoitus tuhota
      */
     private Rivit rivit;
+    
     /**
      * pelialueen leveys
      */
     private final int leveys;
+    
     /**
      * pelialueen korkeus
      */
     private final int korkeus;
+    
     /**
      * pelaajan ohjaama kuvio, joka putoaa tasaisesti pelialueen yläosasta
      * alaosaa kohti.
      */
     private Kuvio kuvio;
+    
     /**
      * totuusarvo sille, onko peli käynnissä
      */
     private boolean peliKaynnissa;
+    
     /**
      * oliomuuttujaan asetetaan piirtoalusta, eli olio jota päivitetään aina
      * jokaisen tapahtuman jälkeen (ts. piirretään pelialue uudelleen)
      */
     private Paivitettava paivitettava;
+    
     /**
      * palojen kääntölogiikan sisältävä oliomuuttuja
      */
     private PalojenKaantoLogiikka kaanto;
+    
     /**
      * pitää kirjaa pelaajalla olevista pisteistä
      */
     private int pisteet;
+    
     /**
-     * tetriksen vaikeustaso
+     * määrittää tasot ja miten niiltä siirrytään toiselle
      */
-    private Vaikeustaso vaikeustaso;
+    private Tasosysteemi tasoSysteemi;
+    /**
+     * pitää kirjaa tuhotuista riveistä
+     */  
+    private int tuhottujaRiveja;
+    
+    /**
+     * sisältää säännöt joilla pisteitä lisätään rivien tuhoutuessa
+     */
+    private PisteytysLogiikka pisteytysLogiikka;
+    
     /**
      * Totuusarvo sille, onko juuri aloitettu uusi pelikierros. Käytetään
      * identifioimaan tilanne, jolloin pelialue pitää piirtää tyhjäksi.
@@ -74,14 +92,15 @@ public class Tetris extends Timer implements ActionListener {
     private boolean uusiKierrosAlkoi;
 
     public Tetris(int leveys, int korkeus, Vaikeustaso taso) {
-        super(195, null);
+        super(350, null);
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
         this.kuvio = this.arvoKuvio();
         this.peliKaynnissa = true;
         this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
-        this.vaikeustaso = taso;
+        this.tasoSysteemi = new Tasosysteemi(this);
+        this.pisteytysLogiikka = new PisteytysLogiikka();
         this.pisteet = 0;
         this.uusiKierrosAlkoi = false;
 
@@ -111,17 +130,6 @@ public class Tetris extends Timer implements ActionListener {
             return new lKirjain(this.leveys / 2, -1);
         } else {
             return new tKirjain(this.leveys / 2, -1);
-        }
-    }
-
-    public void lisaaPisteita(int maara) {
-        this.pisteet += maara;
-    }
-
-    public void kasvataVaikeustasoa() {
-        if (this.vaikeustaso.getTasoNro() < 10 && this.pisteet > (this.vaikeustaso.getTasoNro() * 100)) {           //Hiottava kuntoon
-            this.setVaikeustaso(this.vaikeustaso.seuraavaksiVaikein());
-            System.out.println("vaikeustaso muuttunut");
         }
     }
 
@@ -171,14 +179,17 @@ public class Tetris extends Timer implements ActionListener {
      * @see tetris.domain.Rivit#riviTaysi(int, int)
      */
     public void tuhoaTaydetRivitPudotaYlempanaOleviaPalojaAlaspainJaLisaaPisteet() {
+        int kerrallaTuhottujaRiveja = 0;
         for (int i = 0; i < this.korkeus; i++) {
             if (this.rivit.riviTaysi(i, leveys)) {
                 this.rivit.tuhoaRivi(i);
-                this.lisaaPisteita(100);
+                kerrallaTuhottujaRiveja++;
+                this.tuhottujaRiveja++;
                 this.pudotaYlempanaOlevienRivienPalojaYhdella(i);
             }
+            this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());
+            this.getTasosysteemi().kasvataVaikeustasoa();
         }
-        this.kasvataVaikeustasoa();
     }
 
     /**
@@ -381,16 +392,33 @@ public class Tetris extends Timer implements ActionListener {
             }
         }
     }
+    
+    public void alustaJaAloitaUusiPeli() {
+        this.tuhoaKaikkiRivit();
+        this.nollaaPisteet();
+        this.nollaaTuhotutRivit();      
+        this.setPelikaynnissa(true);
+        this.setUusiKierrosAlkoi(true);
+        this.restart();
+    }
 
     /**
      * Metodi poistaa pelialueen jokaisesta rivistä jokaisen palan.
-     * 
-     * @see tetris.domain.Rivit#tuhoaRivi(int) 
+     *
+     * @see tetris.domain.Rivit#tuhoaRivi(int)
      */
     public void tuhoaKaikkiRivit() {
         for (int i = 0; i < this.korkeus; i++) {
             this.rivit.tuhoaRivi(i);
         }
+    }
+
+    public void nollaaPisteet() {
+        this.pisteet = 0;
+    }
+    
+    public void nollaaTuhotutRivit() {
+        this.tuhottujaRiveja=0;
     }
 
     public boolean getPeliKaynnissa() {
@@ -429,50 +457,19 @@ public class Tetris extends Timer implements ActionListener {
         return this.pisteet;
     }
 
-    /**
-     * Metodi asettaa Tetrikseslle vaikeustason ja muuttaa sen mukaisesti
-     * pelinopeutta.
-     *
-     * @param vaikeustaso pelille asetettava vaikeustaso
-     */
-    public void setVaikeustaso(Vaikeustaso vaikeustaso) {
-        this.vaikeustaso = vaikeustaso;
-        if (vaikeustaso == Vaikeustaso.JUMALMOODI) {
-            this.setDelay(60);
-        } else if (vaikeustaso == Vaikeustaso.UBER) {
-            this.setDelay(75);
-        } else if (vaikeustaso == Vaikeustaso.KOVAKSIKEITETTY) {
-            this.setDelay(90);
-        } else if (vaikeustaso == Vaikeustaso.NOLIFE) {
-            this.setDelay(105);
-        } else if (vaikeustaso == Vaikeustaso.ERITTAINVAIKEA) {
-            this.setDelay(120);
-        } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
-            this.setDelay(135);
-        } else if (vaikeustaso == Vaikeustaso.EDISTYNYT) {
-            this.setDelay(150);
-        } else if (vaikeustaso == Vaikeustaso.NORMAALI) {
-            this.setDelay(165);
-        } else if (vaikeustaso == Vaikeustaso.HELPPO) {
-            this.setDelay(180);
-        } else {
-            this.setDelay(195);
-        }
-    }
-
-    public Vaikeustaso getVaikeustaso() {
-        return this.vaikeustaso;
-    }
-
-    public void nollaaPisteet() {
-        this.pisteet = 0;
-    }
-
     public boolean getUusiKierrosAlkoi() {
         return this.uusiKierrosAlkoi;
     }
 
     public void setUusiKierrosAlkoi(boolean kaynnissa) {
         this.uusiKierrosAlkoi = kaynnissa;
+    }
+
+    public Tasosysteemi getTasosysteemi() {
+        return this.tasoSysteemi;
+    }
+
+    public int getTuhottujenRivienMaara() {
+        return this.tuhottujaRiveja;
     }
 }

@@ -154,42 +154,75 @@ public class PalojenKaantoLogiikka {
      *
      * @return totuusarvo sille, voiko palkkia kääntää
      *
-     * @see tetris.domain.Palkki#getRotaatioPisteenaOlevaPala()
-     * @see tetris.domain.Palkki#onVaakaAsennossa()
-     * @see tetris.domain.Kuvio#onkoKuviossaTietyssaKoordinaatissaJoPala(int,
-     * int)
+     * @see tetris.peli.PalojenKaantoLogiikka#palkkiOsuuRiveihinKaannettaessa(tetris.domain.Palkki) 
+     * @see tetris.peli.PalojenKaantoLogiikka#palkkiOsuuSeinaanTaiLattiaanKaannettaessa(tetris.domain.Palkki) 
+     * 
      */
     public boolean palkkiaVoiKaantaa(Palkki palkki) {
-        int x = palkki.getRotaatioPisteenaOlevaPala().getX();
-        int y = palkki.getRotaatioPisteenaOlevaPala().getY();
-        if (x - 2 < 0 || x + 2 > this.leveys - 1 || (palkki.onVaakaAsennossa() && palkki.getRotaatioPisteenaOlevaPala().getY() + 2 >= this.korkeus - 1)) {
+        if(this.palkkiOsuuRiveihinKaannettaessa(palkki) || this.palkkiOsuuSeinaanTaiLattiaanKaannettaessa(palkki)) {
             return false;
-        }
-        for (int i = 1; i < 3; i++) {
-            for (int j = 1; j < 3; j++) {
-                if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - j, y - i) || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + j, y + i)) {
-                    return false;
-                }
-            }
         }
         return true;
     }
 
     /**
-     * Metodi palauttaa totuusarvon sille, voiko parametrina annettavaa
-     * Z-kirjainta kääntää.
-     *
-     * @param kirjain käännettävä Z-kirjain
-     *
-     * @return totuusarvo sille, voiko Z-kirjainta kääntää
-     *
-     * @see tetris.domain.zKirjain#getRotaatioPisteenaOlevaPala()
-     * @see tetris.domain.zKirjain#onVaakaAsennossa()
-     * @see tetris.domain.zKirjain#getPalaJollaSuurinXKoordinaatti()
-     * @see tetris.domain.Kuvio#onkoKuviossaTietyssaKoordinaatissaJoPala(int,
-     * int)
+     * Metodi palauttaa paluuarvonaan totuusarvon sille, 
+     * osuuko parametrina annettava palkki käännöksessä pelialueen seiniin tai riveihin.
+     * 
+     * @param palkki palkki jota oltaisiin kääntämässä
+     * @return totuusarvo, osuuko palkki seinään tai lattiaan käännettäessä
+     * 
+     * @see tetris.domain.Palkki#onVaakaAsennossa() 
      */
-    public boolean zKirjaintaVoiKaantaa(zKirjain kirjain) {
+    public boolean palkkiOsuuSeinaanTaiLattiaanKaannettaessa(Palkki palkki) {
+        int x = palkki.getRotaatioPisteenaOlevaPala().getX();
+        int y = palkki.getRotaatioPisteenaOlevaPala().getY();
+        if (x - 1 < 0 || x + 2 > this.leveys - 1 || (palkki.onVaakaAsennossa() && palkki.getRotaatioPisteenaOlevaPala().getY() + 2 > this.korkeus - 1)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Metodi palauttaa paluuarvonaan totuusarvon sille, osuuko parametrina sille annettava palkki käännettäessä johonkin pelialueen riviin.
+     * 
+     * @param palkki käännettävä palkki
+     * @return totuusarvo, osuuko palkki riveihin
+     * 
+     * @see tetris.domain.Kuvio#onkoKuviossaTietyssaKoordinaatissaJoPala(int, int) 
+     */
+    public boolean palkkiOsuuRiveihinKaannettaessa(Palkki palkki) {
+        int x = palkki.getRotaatioPisteenaOlevaPala().getX();
+        int y = palkki.getRotaatioPisteenaOlevaPala().getY();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + i, y + j)) {
+                    return true;
+                }
+            }
+        }
+        if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y + 1)
+                || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)
+                || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
+            return false;
+        }
+        return false;
+    }
+
+/**
+ * Metodi palauttaa totuusarvon sille, voiko parametrina annettavaa Z-kirjainta
+ * kääntää.
+ *
+ * @param kirjain käännettävä Z-kirjain
+ *
+ * @return totuusarvo sille, voiko Z-kirjainta kääntää
+ *
+ * @see tetris.domain.zKirjain#getRotaatioPisteenaOlevaPala()
+ * @see tetris.domain.zKirjain#onVaakaAsennossa()
+ * @see tetris.domain.zKirjain#getPalaJollaSuurinXKoordinaatti()
+ * @see tetris.domain.Kuvio#onkoKuviossaTietyssaKoordinaatissaJoPala(int, int)
+ */
+public boolean zKirjaintaVoiKaantaa(zKirjain kirjain) {
         int x = this.getRotaatioPisteenaOlevanPalanXKoordinaatti(kirjain);
         int y = this.getRotaatioPisteenaOlevanPalanYKoordinaatti(kirjain);
         if ((!kirjain.onVaakaAsennossa() && kirjain.getPalaJollaSuurinXKoordinaatti().getX() + 1 > this.leveys - 1)
@@ -329,10 +362,15 @@ public class PalojenKaantoLogiikka {
      * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala()
      * @see tetris.domain.LjaJmuotti#getAsento()
      */
-    public boolean LtaiJkirjaimenKaantoOttaaKiinniSeiniin(LjaJmuotti kirjain) {
-        if (kirjain.getClass() == jKirjain.class && ((kirjain.getRotaatioPisteenaOlevaPala().getX() + 1 > this.leveys - 1)
+    public 
+
+boolean LtaiJkirjaimenKaantoOttaaKiinniSeiniin(LjaJmuotti kirjain) {
+        if (kirjain.getClass() == jKirjain.class  
+
+    && ((kirjain.getRotaatioPisteenaOlevaPala().getX() + 1 > this.leveys - 1)
                 || (kirjain.getAsento() == 3 && kirjain.getRotaatioPisteenaOlevaPala().getX() - 1 < 0))) {
-            return true;
+
+return true;
         }
         if ((kirjain.getAsento() == 2 && kirjain.getRotaatioPisteenaOlevaPala().getX() + 2 > this.leveys - 1)
                 || (kirjain.getAsento() == 0 && kirjain.getRotaatioPisteenaOlevaPala().getX() - 2 < 0)) {
@@ -352,10 +390,15 @@ public class PalojenKaantoLogiikka {
      * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala()
      * @see tetris.domain.LjaJmuotti#getAsento()
      */
-    public boolean LtaiJkirjaimenKaantoOttaaKiinniLattiaan(LjaJmuotti kirjain) {
+    public 
+
+boolean LtaiJkirjaimenKaantoOttaaKiinniLattiaan(LjaJmuotti kirjain) {
         if ((kirjain.getAsento() == 1 && (kirjain.getRotaatioPisteenaOlevaPala().getY() + 2 > this.korkeus - 1))
-                || (kirjain.getClass() == jKirjain.class && kirjain.getAsento() == 0 && kirjain.getRotaatioPisteenaOlevaPala().getY() + 1 > this.korkeus - 1)) {
-            return true;
+                || (kirjain.getClass() == jKirjain.class  
+
+    && kirjain.getAsento() == 0 && kirjain.getRotaatioPisteenaOlevaPala().getY() + 1 > this.korkeus - 1)) {
+
+return true;
         }
         return false;
     }
@@ -381,14 +424,24 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y - i)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 2, y - i)) {
                 return true;
-            }
+            
+
+}
         }
-        if (kirjain.getClass() == lKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y - 1)) {
-            return true;
+        if (kirjain.getClass() == lKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y - 1)) {
+
+return true;
         }
-        if (kirjain.getClass() == jKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)
+        
+
+if (kirjain.getClass() == jKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y + 1)) {
-            return true;
+
+return true;
         }
         return false;
     }
@@ -414,14 +467,24 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - i, y + 1)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - i, y + 2)) {
                 return true;
-            }
+            
+
+}
         }
-        if (kirjain.getClass() == lKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
-            return true;
+        if (kirjain.getClass() == lKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
+
+return true;
         }
-        if (kirjain.getClass() == jKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y + 1)
+        
+
+if (kirjain.getClass() == jKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y + 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y)) {
-            return true;
+
+return true;
         }
         return false;
     }
@@ -447,14 +510,24 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y + i)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 2, y + i)) {
                 return true;
-            }
+            
+
+}
         }
-        if (kirjain.getClass() == lKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)) {
-            return true;
+        if (kirjain.getClass() == lKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)) {
+
+return true;
         }
-        if (kirjain.getClass() == jKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y - 1)
+        
+
+if (kirjain.getClass() == jKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y - 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y - 1)) {
-            return true;
+
+return true;
         }
         return false;
     }
@@ -480,14 +553,24 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + i, y - 1)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + i, y - 2)) {
                 return true;
-            }
+            
+
+}
         }
-        if (kirjain.getClass() == lKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y)) {
-            return true;
+        if (kirjain.getClass() == lKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y)) {
+
+return true;
         }
-        if (kirjain.getClass() == jKirjain.class && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y - 1)
+        
+
+if (kirjain.getClass() == jKirjain.class  
+
+    && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y - 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
-            return true;
+
+return true;
         }
         return false;
     }

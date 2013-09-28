@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Tetris testi = new Tetris(15, 25, Vaikeustaso.VAUVA);
+        Tetris testi = new Tetris(15, 25, Vaikeustaso.ALOITTELIJA);
 
         Kayttoliittyma kayttis = new Kayttoliittyma(testi, 25);  //toinen parametri palan sivun pituus
         SwingUtilities.invokeLater(kayttis);
@@ -30,5 +30,6 @@ public class Main {
 
         testi.setPaivitettava(kayttis.getPaivitettava());
 
+        
     }
 }

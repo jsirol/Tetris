@@ -181,16 +181,16 @@ public class Kayttoliittyma implements Runnable {
      */
     private ArrayList<JCheckBox> muodostaVaikeustasoNappulat() {
         ArrayList<JCheckBox> valinnat = new ArrayList<JCheckBox>();
-        valinnat.add(new JCheckBox("Vauva"));
+        valinnat.add(new JCheckBox("Aloittelija"));
         valinnat.add(new JCheckBox("Helppo"));
         valinnat.add(new JCheckBox("Normaali"));
         valinnat.add(new JCheckBox("Edistynyt"));      
         valinnat.add(new JCheckBox("Vaikea"));
         valinnat.add(new JCheckBox("Erittäin vaikea"));
         valinnat.add(new JCheckBox("Kovaksi keitetty"));
-        valinnat.add(new JCheckBox("Nolife"));
-        valinnat.add(new JCheckBox("Uber"));
-        valinnat.add(new JCheckBox("Jumalmoodi"));
+        valinnat.add(new JCheckBox("Nolife (Pro)"));
+        valinnat.add(new JCheckBox("Uber (Pro)"));
+        valinnat.add(new JCheckBox("Jumalmoodi (Pro)"));
         return valinnat;
     }
 }

@@ -7,7 +7,7 @@ package tetris;
  */
 public enum Vaikeustaso {
 
-    VAUVA(1),
+    ALOITTELIJA(1),
     HELPPO(2),
     NORMAALI(3),
     EDISTYNYT(4),
@@ -40,7 +40,7 @@ public enum Vaikeustaso {
      */
     public Vaikeustaso getTasoNroaVastaavaVaikeustaso(int tasoNro) {
         if (tasoNro == 1) {
-            return Vaikeustaso.VAUVA;
+            return Vaikeustaso.ALOITTELIJA;
         } else if (tasoNro == 2) {
             return Vaikeustaso.HELPPO;
         } else if (tasoNro == 3) {
