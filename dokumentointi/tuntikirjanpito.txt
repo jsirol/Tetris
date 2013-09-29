@@ -66,6 +66,10 @@ P‰ivitetty palkki nelj‰n ruudun mittaiseksi alkuper‰isest‰ viidest‰. Toteutettu 
 
 *k‰ytetty aika 5h
 
+29.9.2013
+----------
+Korjattu virheit‰ ja p‰ivitetty pelin pistelasku- ja tasosysteemej‰. Lis‰tty pistelaskuun kombo-ominaisuus (per‰kk‰isten "vuorojen" aikana tehdyt rivien tuhoamiset antavat bonuspisteit‰). Mietitty mahdollisuutta sis‰llytt‰‰ peliin tuloslista, mutta p‰‰tetty j‰tt‰‰ se tulevaisuuden laajennus-optioksi. Testattu lis‰‰ pelaamalla. Toteutettu koodikatselmoinnissa saadut parannusehdotukset (jotka olivat hyvi‰!).
+
 
 
 
