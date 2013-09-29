@@ -179,6 +179,7 @@ public class Tetris extends Timer implements ActionListener {
             }
             this.getTasosysteemi().kasvataVaikeustasoa();
         }
+        paivitettava.paivita();
         //huom! pisteet lasketaan mahdollisesti kasvaneen vaikeustason mukaan. esim. tuhoat 4 riviä ja taso nousee 2. rivin tuhoamisesta--->palkitaan seuraavan vaikeustason mukaan x4 rivin tuhoamisesta (countteri seuraavaan tasoon alkaa kuitenkin oikeasta kohdasta)
         this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());
     }
