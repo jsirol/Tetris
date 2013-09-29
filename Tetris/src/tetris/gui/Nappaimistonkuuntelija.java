@@ -85,6 +85,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     this.tetris.pudotaKuviotaAlasYhdellaJosVoi(tetris.getKuvio());
                 }
+                this.tetris.getPaivitettava().paivita();
             }
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 this.keskeytaTaiJatkaPelia();

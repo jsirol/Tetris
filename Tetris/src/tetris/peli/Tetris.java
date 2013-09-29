@@ -179,9 +179,8 @@ public class Tetris extends Timer implements ActionListener {
             }
             this.getTasosysteemi().kasvataVaikeustasoa();
         }
-        System.out.println("tuhotut rivit:"+kerrallaTuhottujaRiveja);
         //huom! pisteet lasketaan mahdollisesti kasvaneen vaikeustason mukaan. esim. tuhoat 4 riviä ja taso nousee 2. rivin tuhoamisesta--->palkitaan seuraavan vaikeustason mukaan x4 rivin tuhoamisesta (countteri seuraavaan tasoon alkaa kuitenkin oikeasta kohdasta)
-        this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());      
+        this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());
     }
 
     /**
@@ -405,7 +404,7 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
-    public void nollaaPisteet() {
+    private void nollaaPisteet() {
         this.pisteet = 0;
     }
 
@@ -435,6 +434,10 @@ public class Tetris extends Timer implements ActionListener {
 
     public void setPaivitettava(Paivitettava paivitettava) {
         this.paivitettava = paivitettava;
+    }
+
+    public Paivitettava getPaivitettava() {
+        return this.paivitettava;
     }
 
     public Rivit getRivit() {
