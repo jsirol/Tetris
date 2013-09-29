@@ -61,7 +61,7 @@ public class Kayttoliittyma implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(true);               
     }
 
     /**
@@ -69,9 +69,9 @@ public class Kayttoliittyma implements Runnable {
      * Lisäksi kehykseen asetetaan näppäimistönkuuntelija.
      *
      * @param container objekti johon piirtoalusta lisätään
-     * 
-     * @see tetris.gui.Kayttoliittyma#luoPiirtoalusta() 
-     * @see tetris.gui.Kayttoliittyma#luoValikko() 
+     *
+     * @see tetris.gui.Kayttoliittyma#luoPiirtoalusta()
+     * @see tetris.gui.Kayttoliittyma#luoValikko()
      */
     private void luoKomponentit(Container container) {
         JPanel osat = new JPanel();
@@ -84,9 +84,10 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Metodi palauttaa paluuarvonaan tekstikentän pelaajan nimen syöttämistä varten
-     * 
-     * @return pelaajan nimelle tarkoitettu tekstikenttä 
+     * Metodi palauttaa paluuarvonaan tekstikentän pelaajan nimen syöttämistä
+     * varten
+     *
+     * @return pelaajan nimelle tarkoitettu tekstikenttä
      */
     private JTextField luoPelaajaNimelleKentta() {
         JTextField pelaajaNimi = new JTextField("Anonyymi");
@@ -97,9 +98,10 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Metodi palauttaa paluuarvonaan tekstikentän pistetilanteen näyttämistä varten.
-     * 
-     * @return pistetilanteelle tarkoitettu tekstikenttä 
+     * Metodi palauttaa paluuarvonaan tekstikentän pistetilanteen näyttämistä
+     * varten.
+     *
+     * @return pistetilanteelle tarkoitettu tekstikenttä
      */
     private JTextField luoPisteilleKentta() {
         JTextField pistekentta = new JTextField("0");
@@ -111,9 +113,10 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Metodi palauttaa vaikeustason näyttämistä varten tarkoitetun tekstikentän.
-     * 
-     * @return vaikeustasolle tarkoitettu tekstikenttä 
+     * Metodi palauttaa vaikeustason näyttämistä varten tarkoitetun
+     * tekstikentän.
+     *
+     * @return vaikeustasolle tarkoitettu tekstikenttä
      */
     private JTextField luoVaikeustasolleKentta() {
         JTextField vaikeustaso = new JTextField("-");
@@ -125,12 +128,12 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Metodi palauttaa paluuarvonaan JPanel-olion, 
-     * jossa on Tetriksen valikkoon kuuluvat komponentit aseteltuna oikein.
-     * 
+     * Metodi palauttaa paluuarvonaan JPanel-olion, jossa on Tetriksen valikkoon
+     * kuuluvat komponentit aseteltuna oikein.
+     *
      * @return JPanel-olio, joka toimii tetriksen valikkona
-     * 
-     * @see tetris.gui.Kayttoliittyma#muodostaVaikeustasoNappulat() 
+     *
+     * @see tetris.gui.Kayttoliittyma#muodostaVaikeustasoNappulat()
      */
     private JPanel luoValikko() {
         JPanel valikko = new JPanel();
@@ -144,15 +147,15 @@ public class Kayttoliittyma implements Runnable {
         valikko.add(this.luoPisteilleKentta());
         valikko.add(new JLabel("Vaikeustaso:"));
         valikko.add(this.luoVaikeustasolleKentta());
-        valikko.add(new JLabel("Valitse vaikeustaso: "));
+        valikko.add(new JLabel("Valitse vaikeustaso: "));       
         ArrayList<JCheckBox> valinnat = this.muodostaVaikeustasoNappulat();
         ButtonGroup ryhma = new ButtonGroup();
         for (JCheckBox boksi : valinnat) {
             ryhma.add(boksi);
-            valikko.add(boksi);
+            valikko.add(boksi);          
             boksi.addActionListener(kuuntelija);
         }
-        kuuntelija.setVaikeustasoPainikkeet(valinnat);
+        kuuntelija.setVaikeustasoPainikkeet(valinnat);   
         valikko.add(pelaa);
         return valikko;
     }
@@ -184,13 +187,13 @@ public class Kayttoliittyma implements Runnable {
         valinnat.add(new JCheckBox("Aloittelija"));
         valinnat.add(new JCheckBox("Helppo"));
         valinnat.add(new JCheckBox("Normaali"));
-        valinnat.add(new JCheckBox("Edistynyt"));      
+        valinnat.add(new JCheckBox("Edistynyt"));
         valinnat.add(new JCheckBox("Vaikea"));
         valinnat.add(new JCheckBox("Erittäin vaikea"));
         valinnat.add(new JCheckBox("Kovaksi keitetty"));
         valinnat.add(new JCheckBox("Nolife (Pro)"));
         valinnat.add(new JCheckBox("Uber (Pro)"));
-        valinnat.add(new JCheckBox("Jumalmoodi (Pro)"));
+        valinnat.add(new JCheckBox("Nirvana (Pro)"));
         return valinnat;
     }
 }

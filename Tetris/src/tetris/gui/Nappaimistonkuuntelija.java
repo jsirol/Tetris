@@ -47,7 +47,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * vaikeustason valitsemiseen tarkoitetut painikkeet listana
      */
     private ArrayList<JCheckBox> vaikeustasoPainikkeet;
-
+    
     public Nappaimistonkuuntelija(Tetris tetris) {
         this.tetris = tetris;
         this.keskeytetty = false;
@@ -94,7 +94,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
             this.asetaValikkopainikkeilleTila(true);
         }
     }
-
+    
     /**
      * Metodi asettaa Päävalikon käytettäväksi tarkoitetut painikkeet
      * parametrina annettuun tilaan
@@ -149,7 +149,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
             } else if (e.getSource() == pelaaPainike) {
                 this.asetaValikkopainikkeilleTila(false);
                 if (!tetris.getPeliKaynnissa()) {
-                    this.alustaJaKaynnistaUusiPeli();
+                    this.alustaJaKaynnistaUusiPeli();            
                 } else {
                     tetris.start();
                 }
@@ -163,9 +163,8 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * Metodi päivittää pistekentän ja vaikeustasokentän tiedot kulloisenkin pelitilanteen mukaan.
      */
     private void paivitaTekstikentat() {
-        pisteKentta.setText(this.pisteetMerkkijonona());
-//        vaikeustasoKentta.setText(tetris.getVaikeustaso().toString());
-          vaikeustasoKentta.setText(tetris.getTasosysteemi().getVaikeustaso().toString());
+        pisteKentta.setText(this.pisteetMerkkijonona());      
+        vaikeustasoKentta.setText(tetris.getTasosysteemi().getVaikeustaso().toString());
     }
 
     /**
@@ -234,8 +233,8 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
             tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.NOLIFE);
         } else if (this.valittuCheckBox().getText().equals("Uber (Pro)")) {
             tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.UBER);
-        } else if (this.valittuCheckBox().getText().equals("Jumalmoodi (Pro)")) {
-            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.JUMALMOODI);
+        } else if (this.valittuCheckBox().getText().equals("Nirvana (Pro)")) {
+            tetris.getTasosysteemi().setVaikeustaso(Vaikeustaso.NIRVANA);
         }
     }
 
@@ -280,5 +279,6 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
 
     public void setVaikeustasoPainikkeet(ArrayList<JCheckBox> painikkeet) {
         this.vaikeustasoPainikkeet = painikkeet;
-    }
+    }      
+    
 }

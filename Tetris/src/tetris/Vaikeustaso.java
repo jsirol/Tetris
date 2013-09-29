@@ -16,7 +16,7 @@ public enum Vaikeustaso {
     KOVAKSIKEITETTY(7),
     NOLIFE(8),
     UBER(9),
-    JUMALMOODI(10);
+    NIRVANA(10);
     /**
      * Kokonaisluku tiivistää vaikeustason yhteen lukuun. Pienempi on helpompi.
      */
@@ -58,7 +58,7 @@ public enum Vaikeustaso {
         } else if (tasoNro == 9) {
             return Vaikeustaso.UBER;
         } else if (tasoNro == 10) {
-            return Vaikeustaso.JUMALMOODI;
+            return Vaikeustaso.NIRVANA;
         } else {
             return null;
         }
@@ -74,7 +74,7 @@ public enum Vaikeustaso {
         if (this.getTasoNro() < 10) {
             return this.getTasoNroaVastaavaVaikeustaso(this.getTasoNro()+1);
         } else {
-            return Vaikeustaso.JUMALMOODI;
+            return Vaikeustaso.NIRVANA;
         }
     }
 }

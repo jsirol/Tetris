@@ -33,58 +33,48 @@ public class Tetris extends Timer implements ActionListener {
      * on tarkoitus tuhota
      */
     private Rivit rivit;
-    
     /**
      * pelialueen leveys
      */
     private final int leveys;
-    
     /**
      * pelialueen korkeus
      */
     private final int korkeus;
-    
     /**
      * pelaajan ohjaama kuvio, joka putoaa tasaisesti pelialueen yläosasta
      * alaosaa kohti.
      */
     private Kuvio kuvio;
-    
     /**
      * totuusarvo sille, onko peli käynnissä
      */
     private boolean peliKaynnissa;
-    
     /**
      * oliomuuttujaan asetetaan piirtoalusta, eli olio jota päivitetään aina
      * jokaisen tapahtuman jälkeen (ts. piirretään pelialue uudelleen)
      */
     private Paivitettava paivitettava;
-    
     /**
      * palojen kääntölogiikan sisältävä oliomuuttuja
      */
     private PalojenKaantoLogiikka kaanto;
-    
     /**
      * pitää kirjaa pelaajalla olevista pisteistä
      */
     private int pisteet;
-    
     /**
      * määrittää tasot ja miten niiltä siirrytään toiselle
      */
     private Tasosysteemi tasoSysteemi;
     /**
      * pitää kirjaa tuhotuista riveistä
-     */  
+     */
     private int tuhottujaRiveja;
-    
     /**
      * sisältää säännöt joilla pisteitä lisätään rivien tuhoutuessa
      */
     private PisteytysLogiikka pisteytysLogiikka;
-    
     /**
      * Totuusarvo sille, onko juuri aloitettu uusi pelikierros. Käytetään
      * identifioimaan tilanne, jolloin pelialue pitää piirtää tyhjäksi.
@@ -187,9 +177,11 @@ public class Tetris extends Timer implements ActionListener {
                 this.tuhottujaRiveja++;
                 this.pudotaYlempanaOlevienRivienPalojaYhdella(i);
             }
-            this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());
             this.getTasosysteemi().kasvataVaikeustasoa();
         }
+        System.out.println("tuhotut rivit:"+kerrallaTuhottujaRiveja);
+        //huom! pisteet lasketaan mahdollisesti kasvaneen vaikeustason mukaan. esim. tuhoat 4 riviä ja taso nousee 2. rivin tuhoamisesta--->palkitaan seuraavan vaikeustason mukaan x4 rivin tuhoamisesta (countteri seuraavaan tasoon alkaa kuitenkin oikeasta kohdasta)
+        this.pisteet += this.pisteytysLogiikka.pisteitaTuhottujenRivienJaVaikeustasonMukaan(kerrallaTuhottujaRiveja, this.tasoSysteemi.getVaikeustaso());      
     }
 
     /**
@@ -392,11 +384,11 @@ public class Tetris extends Timer implements ActionListener {
             }
         }
     }
-    
+
     public void alustaJaAloitaUusiPeli() {
         this.tuhoaKaikkiRivit();
         this.nollaaPisteet();
-        this.nollaaTuhotutRivit();      
+        this.nollaaTuhotutRivit();
         this.setPelikaynnissa(true);
         this.setUusiKierrosAlkoi(true);
         this.restart();
@@ -416,9 +408,9 @@ public class Tetris extends Timer implements ActionListener {
     public void nollaaPisteet() {
         this.pisteet = 0;
     }
-    
+
     public void nollaaTuhotutRivit() {
-        this.tuhottujaRiveja=0;
+        this.tuhottujaRiveja = 0;
     }
 
     public boolean getPeliKaynnissa() {

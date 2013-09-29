@@ -112,7 +112,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     private void piirraPaavalikonErottavaViiva(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect((tetris.getLeveys()) * palanPituus, 0, 10, (tetris.getKorkeus() + 2) * palanPituus);     
+        g.fillRect((tetris.getLeveys()) * palanPituus, 0, 10, tetris.getKorkeus() * palanPituus+palanPituus/2);     
     }
     
     /**
@@ -122,7 +122,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     private void piirraAlareunanTyhjanTilanTayttavaViiva(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0, tetris.getKorkeus() * palanPituus, tetris.getLeveys() * palanPituus, 11);
+        g.fillRect(0, tetris.getKorkeus() * palanPituus, tetris.getLeveys() * palanPituus, palanPituus/2);
     }
     
 }

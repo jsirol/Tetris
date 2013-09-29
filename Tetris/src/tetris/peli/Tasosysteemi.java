@@ -27,33 +27,32 @@ public class Tasosysteemi {
     public void kasvataVaikeustasoa() {
         if(this.vaikeustaso.getTasoNro()<10 && this.tetris.getTuhottujenRivienMaara()==10) {
             this.setVaikeustaso(vaikeustaso.seuraavaksiVaikein());
-            System.out.println(this.tetris.getTuhottujenRivienMaara());
             this.tetris.nollaaTuhotutRivit();
         }       
     }
 
     public void setVaikeustaso(Vaikeustaso vaikeustaso) {
         this.vaikeustaso = vaikeustaso;
-        if (vaikeustaso == Vaikeustaso.JUMALMOODI) {
+        if (vaikeustaso == Vaikeustaso.NIRVANA) {
             this.tetris.setDelay(90);
         } else if (vaikeustaso == Vaikeustaso.UBER) {
-            this.tetris.setDelay(110);
-        } else if (vaikeustaso == Vaikeustaso.KOVAKSIKEITETTY) {
-            this.tetris.setDelay(140);
+            this.tetris.setDelay(105);
         } else if (vaikeustaso == Vaikeustaso.NOLIFE) {
-            this.tetris.setDelay(170);
+            this.tetris.setDelay(120);
+        } else if (vaikeustaso == Vaikeustaso.KOVAKSIKEITETTY) {
+            this.tetris.setDelay(150);
         } else if (vaikeustaso == Vaikeustaso.ERITTAINVAIKEA) {
-            this.tetris.setDelay(200);
+            this.tetris.setDelay(280);
         } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
-            this.tetris.setDelay(230);
+            this.tetris.setDelay(210);
         } else if (vaikeustaso == Vaikeustaso.EDISTYNYT) {
-            this.tetris.setDelay(260);
+            this.tetris.setDelay(240);
         } else if (vaikeustaso == Vaikeustaso.NORMAALI) {
-            this.tetris.setDelay(290);
+            this.tetris.setDelay(270);
         } else if (vaikeustaso == Vaikeustaso.HELPPO) {
-            this.tetris.setDelay(320);
+            this.tetris.setDelay(300);
         } else {
-            this.tetris.setDelay(350);
+            this.tetris.setDelay(330);
         }
     }
 }
