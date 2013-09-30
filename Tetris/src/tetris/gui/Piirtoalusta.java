@@ -52,9 +52,12 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         this.piirraPutoavaKuvio(g);
         this.piirraRivit(g);
         this.piirraPaavalikonErottavaViiva(g);
-        this.piirraAlareunanTyhjanTilanTayttavaViiva(g);
+        this.piirraAlareunanTyhjanTilanTayttavaViiva(g);           
         if(!tetris.getPeliKaynnissa()) {
             this.piirraPelinPaattymisIlmoitus(g);
+        }
+        if(tetris.getKeskeytetty()) {
+            this.piirraKeskeytysRuutu(g);
         }
         if (tetris.getUusiKierrosAlkoi()) {
             this.tyhjennaPelialue(g);            
@@ -91,7 +94,15 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * @param g komponentti johon piirretään 
      */
     private void tyhjennaPelialue(Graphics g) {        
-        g.clearRect(0, 0, (tetris.getLeveys() + 1) * palanPituus, (tetris.getKorkeus() + 2) * palanPituus);
+        g.clearRect(0, 0, (tetris.getLeveys() + 1) * palanPituus, (tetris.getKorkeus() + 2) * palanPituus);      
+    }
+    
+    
+    private void piirraKeskeytysRuutu(Graphics g) {
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 0, tetris.getLeveys() * palanPituus, tetris.getKorkeus() * palanPituus);
+        g.setColor(Color.BLACK);
+        g.drawString("PELI KESKEYTETTY!", 5 * palanPituus, 8 * palanPituus);
     }
     /**
      * Metodi piirtää piirtoalustaan pelin päättyessä 

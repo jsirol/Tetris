@@ -80,7 +80,12 @@ public class Tetris extends Timer implements ActionListener {
      * identifioimaan tilanne, jolloin pelialue pitää piirtää tyhjäksi.
      */
     private boolean uusiKierrosAlkoi;
+    
+    private boolean keskeytetty;
 
+    /**
+     * nimelle varattu tekstikenttä
+     */
     public Tetris(int leveys, int korkeus, Vaikeustaso taso) {
         super(350, null);
         this.leveys = leveys;
@@ -88,14 +93,13 @@ public class Tetris extends Timer implements ActionListener {
         this.rivit = new Rivit(leveys, korkeus);
         this.kuvio = this.arvoKuvio();
         this.peliKaynnissa = true;
+        this.keskeytetty=false;
         this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
         this.tasoSysteemi = new Tasosysteemi(this);
         this.pisteytysLogiikka = new PisteytysLogiikka();
         this.pisteet = 0;
         this.uusiKierrosAlkoi = false;
-
         addActionListener(this);
-        setInitialDelay(750);
     }
 
     /**
@@ -467,5 +471,13 @@ public class Tetris extends Timer implements ActionListener {
 
     public int getTuhottujenRivienMaara() {
         return this.tuhottujaRiveja;
+    }
+    
+    public boolean getKeskeytetty() {
+        return this.keskeytetty;
+    }
+    
+    public void setKeskeytetty(boolean keskeytetty) {
+        this.keskeytetty=keskeytetty;
     }
 }

@@ -26,10 +26,6 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * muuttuja sisältää tiedon siitä, onko peli keskeytetty (huom! eri kuin
      * loppunut)
      */
-    private boolean keskeytetty;
-    /**
-     * nimelle varattu tekstikenttä
-     */
     private JTextField nimiKentta;
     /**
      * vaikeustasolle varattu tekstikenttä
@@ -48,10 +44,16 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      */
     private ArrayList<JCheckBox> vaikeustasoPainikkeet;
     
+    
+    private long viimeKeskeytys;
+    private long uusiKeskeytys;
+    
     public Nappaimistonkuuntelija(Tetris tetris) {
-        this.tetris = tetris;
-        this.keskeytetty = false;
+        this.tetris = tetris;      
         tetris.addActionListener(this);
+        //exploit fix
+        viimeKeskeytys=System.currentTimeMillis();
+        uusiKeskeytys=System.currentTimeMillis();
     }
 
     /**
@@ -73,7 +75,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (this.tetris.getPeliKaynnissa()) {
-            if (!this.keskeytetty) {
+            if (!this.tetris.getKeskeytetty()) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     this.tetris.kaannaKuviota();
                 } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -87,7 +89,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
                 }
                 this.tetris.getPaivitettava().paivita();
             }
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {    
                 this.keskeytaTaiJatkaPelia();
             }
         } else {
@@ -125,12 +127,14 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * ole käynnissä, metodi käynnistää sen.
      */
     private void keskeytaTaiJatkaPelia() {
-        if (!this.keskeytetty) {
+        this.uusiKeskeytys=System.currentTimeMillis();
+        if (!this.tetris.getKeskeytetty() && this.uusiKeskeytys-this.viimeKeskeytys>2000) {                
             this.tetris.stop();
-            this.keskeytetty = true;
+            this.tetris.setKeskeytetty(true);
+            this.viimeKeskeytys=this.uusiKeskeytys;
         } else {
             this.tetris.start();
-            this.keskeytetty = false;
+            this.tetris.setKeskeytetty(false);
         }
     }
 
