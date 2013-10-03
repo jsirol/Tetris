@@ -72,6 +72,9 @@ Korjattu virheitä ja päivitetty pelin pistelasku- ja tasosysteemejä. Lisätty pis
 
 *käytety aika 5h
 
+3.10.2013
+----------
+Pieniä korjauksia. Päivitetty javadocia. Tehty peliin aloitusruutu, joka kertoo näppäinkomennot. Kirjoitettu uusille luokille testejä. Päivitetty sekvenssikaavioita ja tehty uusi.
 
 
 
