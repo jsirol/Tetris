@@ -78,7 +78,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (this.tetris.getPeliKaynnissa()) {
+        if (!this.tetris.getPeliPaattynyt()) {
             if (!this.tetris.getKeskeytetty()) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     this.tetris.kaannaKuviota();
@@ -157,7 +157,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
                 this.vaihdaPelinVaikeustasoJaPaivitaVaikeustasoKentta();
             } else if (e.getSource() == pelaaPainike) {
                 this.asetaValikkopainikkeilleTila(false);
-                if (!tetris.getPeliKaynnissa()) {
+                if (tetris.getPeliPaattynyt()) {
                     this.alustaJaKaynnistaUusiPeli();
                 } else {
                     tetris.start();

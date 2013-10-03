@@ -53,7 +53,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         this.piirraRivit(g);
         this.piirraPaavalikonErottavaViiva(g);
         this.piirraAlareunanTyhjanTilanTayttavaViiva(g);
-        if (!tetris.getPeliKaynnissa()) {
+        if (tetris.getPeliPaattynyt()) {
             this.piirraPelinPaattymisIlmoitus(g);
         } else if (!tetris.isRunning()) {
             this.piirraAloitusTeksti(g);

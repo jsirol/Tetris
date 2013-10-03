@@ -47,9 +47,9 @@ public class Tetris extends Timer implements ActionListener {
      */
     private Kuvio kuvio;
     /**
-     * totuusarvo sille, onko peli käynnissä
+     * totuusarvo sille, onko peli loppunut
      */
-    private boolean peliKaynnissa;
+    private boolean peliPaattynyt;
     /**
      * oliomuuttujaan asetetaan piirtoalusta, eli olio jota päivitetään aina
      * jokaisen tapahtuman jälkeen (ts. piirretään pelialue uudelleen)
@@ -91,7 +91,7 @@ public class Tetris extends Timer implements ActionListener {
         this.korkeus = korkeus;
         this.rivit = new Rivit(leveys, korkeus);
         this.kuvio = this.arvoKuvio();
-        this.peliKaynnissa = false;
+        this.peliPaattynyt = false;
         this.keskeytetty = false;
         this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
         this.tasoSysteemi = new Tasosysteemi(this);
@@ -143,7 +143,7 @@ public class Tetris extends Timer implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (this.peliKaynnissa) {
+        if (this.isRunning()) {
             this.uusiKierrosAlkoi = false;
             if (!this.kuvioAlimmallaRivilla(kuvio) && !this.kuvioKiinniJossainRivissa(kuvio)) {
                 kuvio.pudotaYhdella();
@@ -155,7 +155,7 @@ public class Tetris extends Timer implements ActionListener {
                 this.kuvio = this.arvoKuvio();
             }
             if (this.kuvioKiinniYlimmassaRivissa(kuvio)) {
-                this.peliKaynnissa = false;
+                this.peliPaattynyt=true;
                 this.stop();
             }
             paivitettava.paivita();
@@ -402,7 +402,7 @@ public class Tetris extends Timer implements ActionListener {
         this.tuhoaKaikkiRivit();
         this.nollaaPisteet();
         this.nollaaTuhotutRivit();
-        this.setPelikaynnissa(true);
+        this.setPeliPaattynyt(false);
         this.setUusiKierrosAlkoi(true);
         this.restart();
     }
@@ -429,8 +429,8 @@ public class Tetris extends Timer implements ActionListener {
         this.tuhottujaRiveja = 0;
     }
 
-    public boolean getPeliKaynnissa() {
-        return this.peliKaynnissa;
+    public boolean getPeliPaattynyt() {
+        return this.peliPaattynyt;
     }
 
     public Kuvio getKuvio() {
@@ -461,8 +461,8 @@ public class Tetris extends Timer implements ActionListener {
         return this.rivit;
     }
 
-    public void setPelikaynnissa(boolean totuusarvo) {
-        this.peliKaynnissa = totuusarvo;
+    public void setPeliPaattynyt(boolean totuusarvo) {
+        this.peliPaattynyt = totuusarvo;
     }
 
     public int getPisteet() {
