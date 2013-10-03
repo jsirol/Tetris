@@ -13,6 +13,7 @@ import tetris.peli.Tetris;
 
 /**
  * Luokka määrittelee näppäimistönkuuntelijan ja sen toiminnallisuuden.
+ * Lisäksi määritellään päävalikon kuuntelija ja sen toiminnallisuus.
  *
  * @author Johannes
  */
@@ -43,17 +44,20 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * vaikeustason valitsemiseen tarkoitetut painikkeet listana
      */
     private ArrayList<JCheckBox> vaikeustasoPainikkeet;
-    
-    
+    /**
+     * kertoo viimeistä edellisen pelin keskeyttämiseen johtaneen painikkeen painalluksen ajankohdan
+     */
     private long viimeKeskeytys;
+    /**
+     * kertoo viimeisimmän pelin keskeyttämiseen johtaneen painikkeen painalluksen ajankohdan
+     */
     private long uusiKeskeytys;
-    
+
     public Nappaimistonkuuntelija(Tetris tetris) {
-        this.tetris = tetris;      
-        tetris.addActionListener(this);
-        //exploit fix
-        viimeKeskeytys=System.currentTimeMillis();
-        uusiKeskeytys=System.currentTimeMillis();
+        this.tetris = tetris;
+        tetris.addActionListener(this);     
+        viimeKeskeytys = System.currentTimeMillis();
+        uusiKeskeytys = System.currentTimeMillis();
     }
 
     /**
@@ -70,7 +74,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * @see
      * tetris.peli.Tetris#pudotaKuviotaAlasYhdellaJosVoi(tetris.domain.Kuvio)
      * @see tetris.gui.Nappaimistonkuuntelija#keskeytaTaiJatkaPelia()
-     * @see tetris.gui.Nappaimistonkuuntelija#asetaValikkopainikkeilleTila()
+     * @see tetris.gui.Nappaimistonkuuntelija#asetaValikkopainikkeilleTila(boolean) 
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -89,7 +93,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
                 }
                 this.tetris.getPaivitettava().paivita();
             }
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {    
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 this.keskeytaTaiJatkaPelia();
             }
         } else {
@@ -97,7 +101,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
             this.asetaValikkopainikkeilleTila(true);
         }
     }
-    
+
     /**
      * Metodi asettaa Päävalikon käytettäväksi tarkoitetut painikkeet
      * parametrina annettuun tilaan
@@ -127,11 +131,11 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      * ole käynnissä, metodi käynnistää sen.
      */
     private void keskeytaTaiJatkaPelia() {
-        this.uusiKeskeytys=System.currentTimeMillis();
-        if (!this.tetris.getKeskeytetty() && this.uusiKeskeytys-this.viimeKeskeytys>2000) {                
+        this.uusiKeskeytys = System.currentTimeMillis();
+        if (!this.tetris.getKeskeytetty() && this.uusiKeskeytys - this.viimeKeskeytys > 2000) {
             this.tetris.stop();
             this.tetris.setKeskeytetty(true);
-            this.viimeKeskeytys=this.uusiKeskeytys;
+            this.viimeKeskeytys = this.uusiKeskeytys;
         } else {
             this.tetris.start();
             this.tetris.setKeskeytetty(false);
@@ -150,11 +154,11 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource() == this.valittuCheckBox()) {
-                this.vaihdaPelinVaikeustasoJaPaivitaVaikeustasoPainike();
+                this.vaihdaPelinVaikeustasoJaPaivitaVaikeustasoKentta();
             } else if (e.getSource() == pelaaPainike) {
                 this.asetaValikkopainikkeilleTila(false);
                 if (!tetris.getPeliKaynnissa()) {
-                    this.alustaJaKaynnistaUusiPeli();            
+                    this.alustaJaKaynnistaUusiPeli();
                 } else {
                     tetris.start();
                 }
@@ -165,10 +169,11 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
     }
 
     /**
-     * Metodi päivittää pistekentän ja vaikeustasokentän tiedot kulloisenkin pelitilanteen mukaan.
+     * Metodi päivittää pistekentän ja vaikeustasokentän tiedot kulloisenkin
+     * pelitilanteen mukaan.
      */
     private void paivitaTekstikentat() {
-        pisteKentta.setText(this.pisteetMerkkijonona());      
+        pisteKentta.setText(this.pisteetMerkkijonona());
         vaikeustasoKentta.setText(tetris.getTasosysteemi().getVaikeustaso().toString());
     }
 
@@ -178,6 +183,7 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
      *
      * @see tetris.peli.Tetris#tuhoaKaikkiRivit()
      * @see tetris.peli.Tetris#nollaaPisteet()
+     * @see tetris.peli.Tetris#alustaJaAloitaUusiPeli() 
      */
     private void alustaJaKaynnistaUusiPeli() {
         this.tetris.alustaJaAloitaUusiPeli();
@@ -185,7 +191,11 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
 
     }
 
-    private void vaihdaPelinVaikeustasoJaPaivitaVaikeustasoPainike() {
+    /**
+     * Metodi vaihtaa pelin vaikeustasoa valitun valintaruudun mukaan 
+     * ja päivittää tiedon vaikeustasosta vaikeustason ilmaisevaan tekstikenttään.
+     */
+    private void vaihdaPelinVaikeustasoJaPaivitaVaikeustasoKentta() {
         this.vaihdaVaikeustasoRastitunRuudunMukaan();
         vaikeustasoKentta.setText(this.valittuCheckBox().getText());
     }
@@ -284,6 +294,5 @@ public class Nappaimistonkuuntelija implements KeyListener, ActionListener {
 
     public void setVaikeustasoPainikkeet(ArrayList<JCheckBox> painikkeet) {
         this.vaikeustasoPainikkeet = painikkeet;
-    }      
-    
+    }
 }

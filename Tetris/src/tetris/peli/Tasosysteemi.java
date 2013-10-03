@@ -3,12 +3,19 @@ package tetris.peli;
 import tetris.Vaikeustaso;
 
 /**
+ * Luokkan vastuulla on Tetriksen vaikeustason päivittäminen tarpeen vaatiessa.
  *
  * @author Johannes
  */
 public class Tasosysteemi {
 
+    /**
+     * Tetris johon tasosysteemi liittyy.
+     */
     private Tetris tetris;
+    /**
+     * Tetrikselle asetettava vaikeustaso.
+     */
     private Vaikeustaso vaikeustaso;
 
     public Tasosysteemi(Tetris tetris) {
@@ -23,14 +30,28 @@ public class Tasosysteemi {
     public Vaikeustaso getVaikeustaso() {
         return this.vaikeustaso;
     }
-    
+
+    /**
+     * Metodi kasvattaa tetriksen vaikeustasoa yhdellä jos se ei vielä ole
+     * korkein mahdollinen. Vaikeustason ollessa korkein mahdollinen metodi ei
+     * tee mitään.
+     *
+     * @see tetris.peli.Tetris#nollaaTuhotutRivit()
+     * @see tetris.Vaikeustaso#seuraavaksiVaikein()
+     */
     public void kasvataVaikeustasoa() {
-        if(this.vaikeustaso.getTasoNro()<10 && this.tetris.getTuhottujenRivienMaara()==10) {
+        if (this.vaikeustaso.getTasoNro() < 10 && this.tetris.getTuhottujenRivienMaara() == 10) {
             this.setVaikeustaso(vaikeustaso.seuraavaksiVaikein());
             this.tetris.nollaaTuhotutRivit();
-        }       
+        }
     }
 
+    /**
+     * Metodi asettaa parametrikseen annettavan vaikeustason Tetrikselle ja
+     * nostaa samalla Tetriksen nopeutta.
+     *
+     * @param vaikeustaso Tetrikselle asetettava vaikeustaso
+     */
     public void setVaikeustaso(Vaikeustaso vaikeustaso) {
         this.vaikeustaso = vaikeustaso;
         if (vaikeustaso == Vaikeustaso.NIRVANA) {

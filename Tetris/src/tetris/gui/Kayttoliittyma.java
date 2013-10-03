@@ -38,6 +38,10 @@ public class Kayttoliittyma implements Runnable {
      * Piirtoalusta johon piirretään pelissä tarvittavat objektit.
      */
     private Piirtoalusta piirtoalusta;
+    
+    /**
+     * näppäimistönkuuntelija, joka kuuntelee näppäimiä ja päävalikon nappeja
+     */
     private Nappaimistonkuuntelija kuuntelija;
 
     public Kayttoliittyma(Tetris tetris, int sivunPituus) {

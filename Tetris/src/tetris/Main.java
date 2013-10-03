@@ -6,7 +6,7 @@ import tetris.peli.Tetris;
 
 /**
  * Luokka luo Tetriksen käynnistämiseen tarvittavat oliot ja käynnistää
- * Tetris-pelin.
+ * Tetris-pelin käyttöliittymän.
  *
  * @author Johannes
  */
@@ -14,12 +14,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Tetris testi = new Tetris(14, 25, Vaikeustaso.ALOITTELIJA);
-
-        Kayttoliittyma kayttis = new Kayttoliittyma(testi, 25);
+        Tetris tetris = new Tetris(14, 25, Vaikeustaso.ALOITTELIJA);
+        Kayttoliittyma kayttis = new Kayttoliittyma(tetris, 25);
         SwingUtilities.invokeLater(kayttis);
-
-
         while (kayttis.getPaivitettava() == null) {
             try {
                 Thread.sleep(100);
@@ -27,8 +24,6 @@ public class Main {
                 System.out.println("Piirtoalustaa ei ole vielä luotu.");
             }
         }
-
-        testi.setPaivitettava(kayttis.getPaivitettava());
-                
+        tetris.setPaivitettava(kayttis.getPaivitettava());
     }
 }

@@ -15,7 +15,7 @@ public class Palkki extends Kuvio {
 
     public Palkki(int x, int y) {
         super();
-        Vari punainen = Vari.PUNAINEN;  
+        Vari punainen = Vari.PUNAINEN;
         super.lisaaPala(new Pala(x, y - 1, punainen));
         super.lisaaPala(new Pala(x, y, punainen));
         super.lisaaPala(new Pala(x, y + 1, punainen));
@@ -23,10 +23,10 @@ public class Palkki extends Kuvio {
     }
 
     /**
-     * Metodi suorittaa palkin kääntämisen. Palkkia käännetää vastapäivään 
-     * kun käännös tehdään pysty-asennosta
-     * vaaka-asentoon. Vaaka-asennosta pystyasentoon kääntäminen
-     * suoritetaan myötäpäivään. Käännös kääntää palkkia 90 astetta.
+     * Metodi suorittaa palkin kääntämisen. Palkkia käännetää vastapäivään kun
+     * käännös tehdään pysty-asennosta vaaka-asentoon. Vaaka-asennosta
+     * pystyasentoon kääntäminen suoritetaan myötäpäivään. Käännös kääntää
+     * palkkia 90 astetta.
      *
      * @see tetris.domain.Palkki#kaannaPystystaVaakaan()
      * @see tetris.domain.Palkki#kaannaVaastaPystyyn()
@@ -48,7 +48,7 @@ public class Palkki extends Kuvio {
      * @return totuusarvo, onko palkki vaaka-asennossa
      */
     public boolean onVaakaAsennossa() {
-        if(super.onkoKuviossaTietyssaKoordinaatissaJoPala(this.getRotaatioPisteenaOlevaPala().getX()+2, this.getRotaatioPisteenaOlevaPala().getY())) {
+        if (super.onkoKuviossaTietyssaKoordinaatissaJoPala(this.getRotaatioPisteenaOlevaPala().getX() + 2, this.getRotaatioPisteenaOlevaPala().getY())) {
             return true;
         }
         return false;
@@ -62,15 +62,9 @@ public class Palkki extends Kuvio {
      *
      */
     public void kaannaVaastaPystyyn() {
-//        int i = -2;
-//        for (Pala pala : this.getPalat()) {
-//            pala.setX(this.getRotaatioPisteenaOlevaPala().getX());
-//            pala.setY(this.getRotaatioPisteenaOlevaPala().getY() + i);
-//            i++;
-//        }
         int i = -1;
         for (Pala pala : this.getPalat()) {
-            pala.setSijainti(this.getRotaatioPisteenaOlevaPala().getX(), this.getRotaatioPisteenaOlevaPala().getY()+i);
+            pala.setSijainti(this.getRotaatioPisteenaOlevaPala().getX(), this.getRotaatioPisteenaOlevaPala().getY() + i);
             i++;
         }
     }
@@ -83,12 +77,6 @@ public class Palkki extends Kuvio {
      *
      */
     public void kaannaPystystaVaakaan() {
-//        int i = -2;
-//        for (Pala pala : this.getPalat()) {
-//            pala.setX(this.getRotaatioPisteenaOlevaPala().getX() + i);
-//            pala.setY(this.getRotaatioPisteenaOlevaPala().getY());
-//            i++;
-//        }
         int i = -1;
         for (Pala pala : this.getPalat()) {
             pala.setSijainti(this.getRotaatioPisteenaOlevaPala().getX() + i, this.getRotaatioPisteenaOlevaPala().getY());
@@ -103,7 +91,6 @@ public class Palkki extends Kuvio {
      */
     @Override
     public Pala getRotaatioPisteenaOlevaPala() {
-        //return this.getPalat().get(2);
         return this.getPalat().get(1);
     }
 }

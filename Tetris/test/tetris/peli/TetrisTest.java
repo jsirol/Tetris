@@ -50,13 +50,7 @@ public class TetrisTest {
     public void metodipudotaYlempanaOlevienRivienPalojaYhdellaToimiiOikein() {
         peli.pudotaYlempanaOlevienRivienPalojaYhdella(29);
         assertEquals("[(7,6)]", this.peli.getRivit().getRivinPalat(6).toString());
-    }
-    
-    @Test
-    public void metodituhoaTaydetRivitJaJaPudotaYlempanaOleviaPalojaAlaspainToimiiOikein() {
-        peli.tuhoaTaydetRivitPudotaYlempanaOleviaPalojaAlaspainJaLisaaPisteet();
-        assertEquals("[(7,7)]", this.peli.getRivit().getRivinPalat(7).toString());
-    }
+    }   
     
     @Test
     public void metodiPutoavaKuvioAlimmallaRivillaToimiiOikein() {

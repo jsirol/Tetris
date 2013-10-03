@@ -425,21 +425,15 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y - i)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 2, y - i)) {
                 return true;
-
-
             }
         }
         if (kirjain.getClass() == lKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y - 1)) {
-
             return true;
         }
-
-
         if (kirjain.getClass() == jKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y + 1)) {
-
             return true;
         }
         return false;
@@ -466,21 +460,15 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - i, y + 1)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - i, y + 2)) {
                 return true;
-
-
             }
         }
         if (kirjain.getClass() == lKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
-
             return true;
         }
-
-
         if (kirjain.getClass() == jKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y + 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y)) {
-
             return true;
         }
         return false;
@@ -507,21 +495,15 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y + i)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 2, y + i)) {
                 return true;
-
-
             }
         }
         if (kirjain.getClass() == lKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y + 1)) {
-
             return true;
         }
-
-
         if (kirjain.getClass() == jKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x, y - 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y - 1)) {
-
             return true;
         }
         return false;
@@ -548,21 +530,15 @@ public class PalojenKaantoLogiikka {
             if (this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + i, y - 1)
                     || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + i, y - 2)) {
                 return true;
-
-
             }
         }
         if (kirjain.getClass() == lKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x + 1, y)) {
-
             return true;
         }
-
-
         if (kirjain.getClass() == jKirjain.class
                 && this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y - 1)
                 || this.rivit.onkoKuviossaTietyssaKoordinaatissaJoPala(x - 1, y)) {
-
             return true;
         }
         return false;

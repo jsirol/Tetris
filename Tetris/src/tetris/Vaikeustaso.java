@@ -65,14 +65,14 @@ public enum Vaikeustaso {
     }
 
     /**
-     * Metodi palauttaa sitä kutsuvaa Vaikeustasoa seuraavan Vaikeustason.
-     * Jos vaikeustaso on jo korkein, palautetaan korkein vaikeustaso.
+     * Metodi palauttaa sitä kutsuvaa Vaikeustasoa seuraavan Vaikeustason. Jos
+     * vaikeustaso on jo korkein, palautetaan korkein vaikeustaso.
      *
      * @return seuraavaksi vaikein vaikeustaso
      */
     public Vaikeustaso seuraavaksiVaikein() {
         if (this.getTasoNro() < 10) {
-            return this.getTasoNroaVastaavaVaikeustaso(this.getTasoNro()+1);
+            return this.getTasoNroaVastaavaVaikeustaso(this.getTasoNro() + 1);
         } else {
             return Vaikeustaso.NIRVANA;
         }
