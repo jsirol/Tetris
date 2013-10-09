@@ -17,7 +17,7 @@ import tetris.domain.zKirjain;
  *
  * @author Johannes
  */
-public class PalojenKaantoLogiikka {
+public class KuvioidenKaantoLogiikka {
 
     /**
      * Sisältää tiedon pelialueella olevista paloista poislukien pala jota
@@ -33,7 +33,7 @@ public class PalojenKaantoLogiikka {
      */
     private int korkeus;
 
-    public PalojenKaantoLogiikka(Rivit rivit, int leveys, int korkeus) {
+    public KuvioidenKaantoLogiikka(Rivit rivit, int leveys, int korkeus) {
         this.rivit = rivit;
         this.leveys = leveys;
         this.korkeus = korkeus;

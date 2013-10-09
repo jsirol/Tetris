@@ -27,7 +27,7 @@ public class PalojenKaantoLogiikkaTest {
 
     //muokkaa riippumattomaksi luokasta tetris
     Tetris tetris;
-    PalojenKaantoLogiikka kaanto;
+    KuvioidenKaantoLogiikka kaanto;
 
     public PalojenKaantoLogiikkaTest() {
     }
@@ -43,7 +43,7 @@ public class PalojenKaantoLogiikkaTest {
     @Before
     public void setUp() {
         tetris = new Tetris(15, 30, Vaikeustaso.EDISTYNYT);
-        kaanto = new PalojenKaantoLogiikka(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
+        kaanto = new KuvioidenKaantoLogiikka(tetris.getRivit(), tetris.getLeveys(), tetris.getKorkeus());
     }
 
     @After

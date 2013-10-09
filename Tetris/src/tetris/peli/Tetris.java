@@ -1,6 +1,6 @@
 package tetris.peli;
 
-import tetris.peli.PalojenKaantoLogiikka;
+import tetris.peli.KuvioidenKaantoLogiikka;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -58,7 +58,7 @@ public class Tetris extends Timer implements ActionListener {
     /**
      * palojen kääntölogiikan sisältävä oliomuuttuja
      */
-    private PalojenKaantoLogiikka kaanto;
+    private KuvioidenKaantoLogiikka kaanto;
     /**
      * pitää kirjaa pelaajalla olevista pisteistä
      */
@@ -93,7 +93,7 @@ public class Tetris extends Timer implements ActionListener {
         this.kuvio = this.arvoKuvio();
         this.peliPaattynyt = false;
         this.keskeytetty = false;
-        this.kaanto = new PalojenKaantoLogiikka(rivit, leveys, korkeus);
+        this.kaanto = new KuvioidenKaantoLogiikka(rivit, leveys, korkeus);
         this.tasoSysteemi = new Tasosysteemi(this);
         this.pisteytysLogiikka = new PisteytysLogiikka();
         this.pisteet = 0;
