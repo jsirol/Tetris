@@ -49,15 +49,15 @@ public class KuvioidenKaantoLogiikka {
      * @return totuusarvo sille, voiko kuviota kääntää
      *
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaintaVoiKaantaa(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaintaVoiKaantaa(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#palkkiaVoiKaantaa(tetris.domain.Palkki)
+     * tetris.peli.KuvioidenKaantoLogiikka#palkkiaVoiKaantaa(tetris.domain.Palkki)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#sKirjaintaVoiKaantaa(tetris.domain.sKirjain)
+     * tetris.peli.KuvioidenKaantoLogiikka#sKirjaintaVoiKaantaa(tetris.domain.sKirjain)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#tKirjaintaVoiKaantaa(tetris.domain.tKirjain)
+     * tetris.peli.KuvioidenKaantoLogiikka#tKirjaintaVoiKaantaa(tetris.domain.tKirjain)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#zKirjaintaVoiKaantaa(tetris.domain.zKirjain)
+     * tetris.peli.KuvioidenKaantoLogiikka#zKirjaintaVoiKaantaa(tetris.domain.zKirjain)
      */
     public boolean putoavaaKuviotaVoiKaantaa(Kuvio kuvio) {
         if (kuvio.getClass() == Palkki.class) {
@@ -83,9 +83,9 @@ public class KuvioidenKaantoLogiikka {
      * @return totuusarvo sille, voiko z-kirjainta kääntää
      *
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#tKirjaimenKaantoAiheuttaaSeinaanTaiLattiaanOsumisen(tetris.domain.tKirjain)
+     * tetris.peli.KuvioidenKaantoLogiikka#tKirjaimenKaantoAiheuttaaSeinaanTaiLattiaanOsumisen(tetris.domain.tKirjain)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#tKirjaimenKaantoOsuuRiviin(tetris.domain.tKirjain)
+     * tetris.peli.KuvioidenKaantoLogiikka#tKirjaimenKaantoOsuuRiviin(tetris.domain.tKirjain)
      */
     public boolean tKirjaintaVoiKaantaa(tKirjain kirjain) {
         if (this.tKirjaimenKaantoAiheuttaaSeinaanTaiLattiaanOsumisen(kirjain) || this.tKirjaimenKaantoOsuuRiviin(kirjain)) {
@@ -155,9 +155,9 @@ public class KuvioidenKaantoLogiikka {
      * @return totuusarvo sille, voiko palkkia kääntää
      *
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#palkkiOsuuRiveihinKaannettaessa(tetris.domain.Palkki)
+     * tetris.peli.KuvioidenKaantoLogiikka#palkkiOsuuRiveihinKaannettaessa(tetris.domain.Palkki)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#palkkiOsuuSeinaanTaiLattiaanKaannettaessa(tetris.domain.Palkki)
+     * tetris.peli.KuvioidenKaantoLogiikka#palkkiOsuuSeinaanTaiLattiaanKaannettaessa(tetris.domain.Palkki)
      *
      */
     public boolean palkkiaVoiKaantaa(Palkki palkki) {
@@ -282,9 +282,9 @@ public class KuvioidenKaantoLogiikka {
      * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala()
      * @see tetris.domain.LjaJmuotti#getAsento()
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaintaVoiKaantaaPystystaVaakaan(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaintaVoiKaantaaPystystaVaakaan(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaintaVoiKaantaaVaastaPystyyn(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaintaVoiKaantaaVaastaPystyyn(tetris.domain.LjaJmuotti)
      */
     public boolean LtaiJkirjaintaVoiKaantaa(LjaJmuotti kirjain) {
         if (kirjain.getAsento() == 0 || kirjain.getAsento() == 2) {
@@ -307,13 +307,13 @@ public class KuvioidenKaantoLogiikka {
      *
      * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala()
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniLattiaan(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniLattiaan(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniSeiniin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniSeiniin(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta0OttaaRiveihin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta0OttaaRiveihin(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta2OttaaRiveihin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta2OttaaRiveihin(tetris.domain.LjaJmuotti)
      */
     //kertoo voiko lKirjainta kääntää pystyasennosta vaakaan (pystyasennot= asennot 0 ja 2)
     public boolean LtaiJkirjaintaVoiKaantaaPystystaVaakaan(LjaJmuotti kirjain) {
@@ -338,13 +338,13 @@ public class KuvioidenKaantoLogiikka {
      *
      * @see tetris.domain.LjaJmuotti#getRotaatioPisteenaOlevaPala()
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniLattiaan(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniLattiaan(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta1OttaaRiveihin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta1OttaaRiveihin(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta3OttaaRiveihin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoAsennosta3OttaaRiveihin(tetris.domain.LjaJmuotti)
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniSeiniin(tetris.domain.LjaJmuotti)
+     * tetris.peli.KuvioidenKaantoLogiikka#LtaiJkirjaimenKaantoOttaaKiinniSeiniin(tetris.domain.LjaJmuotti)
      */
     public boolean LtaiJkirjaintaVoiKaantaaVaastaPystyyn(LjaJmuotti kirjain) {
         int x = this.getRotaatioPisteenaOlevanPalanXKoordinaatti(kirjain);

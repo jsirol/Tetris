@@ -56,7 +56,7 @@ public class Tetris extends Timer implements ActionListener {
      */
     private Paivitettava paivitettava;
     /**
-     * palojen kääntölogiikan sisältävä oliomuuttuja
+     * kuvioiden kääntölogiikan sisältävä oliomuuttuja
      */
     private KuvioidenKaantoLogiikka kaanto;
     /**
@@ -361,7 +361,7 @@ public class Tetris extends Timer implements ActionListener {
      * Metodi tarkistaa voiko kuviota kääntää ja jos voi, kääntää sitä.
      *
      * @see
-     * tetris.peli.PalojenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio)
+     * tetris.peli.KuvioidenKaantoLogiikka#putoavaaKuviotaVoiKaantaa(tetris.domain.Kuvio)
      * @see tetris.domain.Kuvio#kaanna()
      */
     public void kaannaKuviota() {
