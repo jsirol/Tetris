@@ -70,11 +70,17 @@ P‰ivitetty palkki nelj‰n ruudun mittaiseksi alkuper‰isest‰ viidest‰. Toteutettu 
 ----------
 Korjattu virheit‰ ja p‰ivitetty pelin pistelasku- ja tasosysteemej‰. Lis‰tty pistelaskuun kombo-ominaisuus (per‰kk‰isten "vuorojen" aikana tehdyt rivien tuhoamiset antavat bonuspisteit‰). Mietitty mahdollisuutta sis‰llytt‰‰ peliin tuloslista, mutta p‰‰tetty j‰tt‰‰ se tulevaisuuden laajennus-optioksi. Testattu lis‰‰ pelaamalla. Toteutettu koodikatselmoinnissa saadut parannusehdotukset (jotka olivat hyvi‰!).
 
-*k‰ytety aika 5h
+*k‰ytetty aika 5h
 
 3.10.2013
 ----------
 Pieni‰ korjauksia. P‰ivitetty javadocia. Tehty peliin aloitusruutu, joka kertoo n‰pp‰inkomennot. Kirjoitettu uusille luokille testej‰. P‰ivitetty sekvenssikaavioita ja tehty uusi.
+
+12.10.2013
+-----------
+Kirjoitettu testausdokumentti, p‰ivitetty luokkakaavioita, kirjoitettu k‰yttˆohjeet ja aiheen rakenteesta selitys aiheen kuvauksen per‰‰n.
+
+*k‰ytetty aika 2h
 
 
 
